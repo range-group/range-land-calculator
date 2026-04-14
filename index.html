@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Range Land Group — Deal Calculator</title>
+
+  <!-- PWA / Home Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="RLG Calc" />
+  <meta name="theme-color" content="#f8f8f8" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,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" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #f8f8f8; color: #111; font-family: 'Inter', -apple-system, sans-serif; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+    button { cursor: pointer; font-family: 'Inter', sans-serif; }
+    input, select { font-family: 'JetBrains Mono', 'Courier New', monospace; color: #111; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+    :root {
+      --bg: #f8f8f8;
+      --surface: #ffffff;
+      --surface-2: #f4f4f5;
+      --border: #e4e4e7;
+      --border-strong: #d4d4d8;
+      --text: #111111;
+      --text-2: #52525b;
+      --text-3: #a1a1aa;
+      --accent: #1a56db;
+      --accent-light: #eff4ff;
+      --accent-border: #bfcffa;
+      --green: #16a34a;
+      --amber: #b45309;
+      --red: #dc2626;
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    .app { min-height: 100vh; padding: 3rem 1.5rem 6rem; background: var(--bg); }
+    .inner { max-width: 880px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .hdr { margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .hdr-badge { font-size: 0.7rem; font-family: var(--mono); background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent-border); border-radius: 5px; padding: 0.3rem 0.7rem; font-weight: 500; }
+
+    .section { margin-bottom: 1.8rem; }
+    .sec-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.6rem; }
+    .sec-label::after { content:''; flex:1; height:1px; background: var(--border); }
+    .sub-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3); margin: 0.9rem 0 0.5rem; }
+
+    .model-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text-2); font-size: 0.85rem; font-weight: 400; margin-bottom: 0.4rem; transition: all 0.12s; text-align: left; }
+    .model-btn:hover { border-color: var(--border-strong); color: var(--text); }
+    .model-btn.active { background: var(--accent-light); border-color: var(--accent); border-width: 1.5px; color: var(--text); }
+    .model-price { font-family: var(--mono); font-size: 0.8rem; color: var(--text-3); }
+    .model-btn.active .model-price { color: var(--accent); font-weight: 500; }
+
+    .tg { display: grid; gap: 0.35rem; }
+    .tg-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 0.5rem 0.3rem; color: var(--text-3); font-size: 0.8rem; font-weight: 400; transition: all 0.12s; }
+    .tg-btn:hover { border-color: var(--border-strong); color: var(--text-2); }
+    .tg-btn.active { background: var(--accent-light); border-color: var(--accent); border-width: 1.5px; color: var(--accent); font-weight: 600; }
+
+    .field { margin-bottom: 0.9rem; }
+    .field-lbl { font-size: 0.7rem; font-weight: 500; color: var(--text-2); margin-bottom: 0.35rem; letter-spacing: 0.01em; }
+    .field-row { position: relative; }
+    .field-pre { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--text-3); font-family: var(--mono); font-size: 0.85rem; pointer-events: none; }
+    .field-inp { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 0.75rem 0.65rem 1.7rem; color: var(--text); font-family: var(--mono); font-size: 0.88rem; outline: none; transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none; }
+    .field-inp:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+
+    .sl { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.38rem; }
+    .sl-lbl { flex: 1; font-size: 0.8rem; color: var(--text-3); }
+    .sl-lbl-inp { flex: 1; background: transparent; border: 1px solid transparent; border-radius: 4px; padding: 0.25rem 0.4rem; color: var(--text-3); font-size: 0.78rem; outline: none; font-family: 'Inter', sans-serif; }
+    .sl-lbl-inp:focus { border-color: var(--border); background: var(--surface); }
+    .sl-wrap { position: relative; width: 90px; flex-shrink: 0; }
+    .sl-pre { position: absolute; left: 0.5rem; top: 50%; transform: translateY(-50%); color: var(--text-3); font-size: 0.72rem; pointer-events: none; font-family: var(--mono); }
+    .sl-inp { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.32rem 0.4rem 0.32rem 1.1rem; color: var(--text); font-family: var(--mono); font-size: 0.78rem; outline: none; -webkit-appearance: none; }
+    .sl-inp:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(26,86,219,0.1); }
+    .sl-total { display: flex; justify-content: space-between; padding-top: 0.65rem; margin-top: 0.4rem; border-top: 1px solid var(--border); }
+    .sl-total-lbl { font-size: 0.83rem; font-weight: 600; color: var(--text); }
+    .sl-total-val { font-family: var(--mono); font-size: 0.88rem; font-weight: 600; color: var(--text); }
+
+    .indicator { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1rem; }
+    .ind-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .ind-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
+    .ind-sub { font-size: 0.68rem; color: var(--text-3); margin-top: 0.15rem; }
+
+    .profit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem 1.2rem 1.4rem; margin-bottom: 1.5rem; text-align: center; }
+    .profit-lbl { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.6rem; }
+    .profit-val { font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1; font-family: 'Inter', sans-serif; }
+    .profit-meta { display: flex; justify-content: center; gap: 0; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .meta-item { flex: 1; text-align: center; border-right: 1px solid var(--border); }
+    .meta-item:last-child { border-right: none; }
+    .meta-lbl { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+    .meta-val { font-size: 1rem; font-family: var(--mono); color: var(--text); margin-top: 0.25rem; font-weight: 500; }
+
+    .cs-row { display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0; }
+    .cs-lbl { font-size: 0.8rem; color: var(--text-2); }
+    .cs-val { font-family: var(--mono); font-size: 0.8rem; color: var(--text-2); }
+    .cs-row.in { padding-left: 0.9rem; }
+    .cs-row.in .cs-lbl { font-size: 0.76rem; color: var(--text-3); }
+    .cs-row.in .cs-val { font-size: 0.76rem; color: var(--text-3); }
+    .cs-row.b .cs-lbl { font-weight: 600; color: var(--text); font-size: 0.84rem; }
+    .cs-row.b .cs-val { font-weight: 600; color: var(--text); font-size: 0.84rem; }
+    .cs-row.neg .cs-val { color: var(--red); }
+    .cs-div { height: 1px; background: var(--border); margin: 0.5rem 0; }
+    .cs-cat { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin: 0.7rem 0 0.25rem; }
+    .cs-net { display: flex; justify-content: space-between; padding: 0.6rem 0; margin-top: 0.25rem; border-top: 2px solid var(--text); }
+    .cs-net-lbl { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .cs-net-val { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; }
+
+    .sens-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
+    .sens-lbl { font-family: var(--mono); font-size: 0.66rem; width: 3.2rem; flex-shrink: 0; color: var(--text-3); }
+    .sens-lbl.a { color: var(--accent); font-weight: 600; }
+    .sens-track { flex: 1; height: 4px; background: var(--surface-2); border-radius: 3px; }
+    .sens-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+    .sens-val { font-family: var(--mono); font-size: 0.72rem; width: 5.5rem; text-align: right; flex-shrink: 0; color: var(--text-3); }
+    .sens-val.a { font-weight: 600; }
+
+    .inline-row { display: flex; justify-content: space-between; align-items: center; padding: 0.32rem 0; border-bottom: 1px solid var(--border); }
+    .inline-row:last-child { border-bottom: none; }
+    .inline-lbl { font-size: 0.78rem; color: var(--text-3); }
+    .inline-val { font-family: var(--mono); font-size: 0.78rem; color: var(--text-2); }
+
+    /* ── COMPARE MODE ── */
+    .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .cmp-grid { grid-template-columns: 1fr; } }
+    .cmp-col { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; }
+    .cmp-col.winner { border-color: var(--green); border-width: 2px; }
+    .cmp-row { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+    .cmp-row:last-child { border-bottom: none; }
+    .cmp-lbl { font-size: 0.72rem; color: var(--text-3); }
+    .cmp-val { font-family: var(--mono); font-size: 0.72rem; color: var(--text); font-weight: 500; }
+    @keyframes fadeup { from { opacity:0; transform:translateX(-50%) translateY(10px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+    /* Zero-value dimming */
+    .inline-row .zv, .cs-row .zv { opacity: 0.35; }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const DEFAULT_MODELS=[
+  {name:"TRU Redwood",            cost:73000, sqft:2001, claytonTrim:false},
+  {name:"TRU Sycamore",           cost:68000, sqft:1790, claytonTrim:false},
+  {name:"TRU Oak",                cost:57000, sqft:1475, claytonTrim:false},
+  {name:"Clayton Haven",          cost:71000, sqft:1580, claytonTrim:true},
+  {name:"Clayton Solace",         cost:79000, sqft:1790, claytonTrim:true},
+  {name:"Clayton Choice",         cost:88000, sqft:1896, claytonTrim:true},
+  {name:"Clayton Absolute Value", cost:93000, sqft:2001, claytonTrim:true},
+  {name:"Custom / Other",         cost:0,     sqft:0,    claytonTrim:false},
+];
+const DEFAULTS={
+  homeIdx:1,customHome:73000,customHomeName:"Custom Model",
+  modelCosts:[73000,68000,57000,71000,79000,88000,93000,0],
+  dealName:"",dealAddress:"",notes:"",
+  lotCost:70000,salePrice:260000,loanMonths:5,commPct:0.06,sellerCredit:0,
+  financed:true, ltcPct:90,ltvCapPct:70,surveyAmount:650,
+  interestRate:12,originationPts:2.5,
+  setup:{housePad:2000,driveway:1200,culvert:700,grading:1200,septic:8500,plumbing:400,waterLine:700,electric:2200,electricPost:2000,setLevel:7250,trimUpgrade:3300,fhaRetrofit:3000,skirting:3000,decks:3000,hvac:4000,demo:0,custom1:0,custom2:0,contingency:2500},
+  c1lbl:"Custom Item 1",c2lbl:"Custom Item 2",
+  taxRate:1.85,
+  holding:{insurance:1200,maintenance:500,hoa:0,utilities:500,custom:0},hcLbl:"Other",
+  // Quick mode
+  quickAcres:1,quickArvOverride:false,quickTargetProfit:45000,quickCostsOpen:false,
+  // Compare mode
+  compareA:0,compareB:3,
+  // Buyer mortgage
+  buyerDownPct:10,buyerRate:7,buyerTerm:30,buyerInsAnnual:1800,buyerPmiRate:0.75,
+  // Subdivision
+  sub:{
+    landPrice:0,totalFrontage:0,ftPerLot:150,
+    financed:true,interestRate:12,originationPts:2.5,ltcPct:65,loanMonths:12,
+    waterMeterCost:15000,numMetersOverride:0,miscWaterCost:0,
+    electricPerLot:1500,surveyCost:0,roadCost:0,attorneyFees:0,filingFees:500,
+    custom1:0,custom2:0,c1lbl:"Custom Item 1",c2lbl:"Custom Item 2",
+    buyClosingOverride:0,
+    holdInsurance:0,holdTaxRate:1.85,holdMaint:0,
+    agExemption:false,agValue:0,marketValue:0,rollbackYears:3,rollbackInterest:7,
+    exitView:"compare",commPct:0.06,
+    lotArvTrad:0,
+    lotArvSF:0,sfDownPct:10,sfRate:10,sfTermYrs:10,
+    lotArvMH:0,mhHomeCost:68000,mhSetupCost:45000
+  }
+};
+
+function loadState(){
+  try{const s=localStorage.getItem("rlg_calc_v1");
+    if(s){const p=JSON.parse(s);
+      const d=JSON.parse(JSON.stringify(DEFAULTS));
+      d.setup={...d.setup,...(p.setup||{})};
+      d.holding={...d.holding,...(p.holding||{})};
+      d.sub={...d.sub,...(p.sub||{})};
+      return{...d,...p,setup:d.setup,holding:d.holding,sub:d.sub};
+    }
+    return JSON.parse(JSON.stringify(DEFAULTS));
+  }catch{return JSON.parse(JSON.stringify(DEFAULTS));}
+}
+function saveState(){try{localStorage.setItem("rlg_calc_v1",JSON.stringify(S));}catch{}}
+function resetState(){
+  const saved=S.savedDeals||[];
+  Object.assign(S,JSON.parse(JSON.stringify(DEFAULTS)));
+  S.mode=S.mode||"full";S.savedDeals=saved;
+  saveState();render();
+}
+const S=loadState();
+// Migrate: reset sub if old fields detected or new ones missing
+if(S.sub && (S.sub.filingFees===undefined || S.sub.legalCost!==undefined || S.sub.electricTotal!==undefined || S.sub.buyClosing!==undefined || S.sub.agExemption===undefined)){
+  S.sub=JSON.parse(JSON.stringify(DEFAULTS.sub));
+}
+if(!S.mode)S.mode="full";
+if(!S.savedDeals)S.savedDeals=[];
+if(!S.notes)S.notes="";
+if(S.quickAcres===undefined)S.quickAcres=1;
+if(S.quickArvOverride===undefined)S.quickArvOverride=false;
+if(S.quickTargetProfit===undefined)S.quickTargetProfit=45000;
+if(S.quickCostsOpen===undefined)S.quickCostsOpen=false;
+if(S.compareA===undefined)S.compareA=0;
+if(S.compareB===undefined)S.compareB=3;
+if(S.buyerDownPct===undefined)S.buyerDownPct=10;
+if(S.buyerRate===undefined)S.buyerRate=7;
+if(S.buyerTerm===undefined)S.buyerTerm=30;
+if(S.buyerInsAnnual===undefined)S.buyerInsAnnual=1800;
+if(S.buyerPmiRate===undefined)S.buyerPmiRate=0.75;
+
+const BUY_TITLE=0.005,SELL_TITLE=0.01,MINP=35000;
+const fmt=n=>n<0?`-$${Math.abs(Math.round(n)).toLocaleString()}`:`$${Math.round(n).toLocaleString()}`;
+const fmtP=n=>`${(n*100).toFixed(1)}%`;
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+
+// ── CORE RECALC (uses current S state) ──
+function recalc(){return recalcFor(S.homeIdx);}
+
+// ── RECALC FOR ANY MODEL INDEX (reuses same deal variables) ──
+function recalcFor(idx){
+  const hc = idx===DEFAULT_MODELS.length-1 ? S.customHome : S.modelCosts[idx];
+  const modelName = idx===DEFAULT_MODELS.length-1 ? S.customHomeName : DEFAULT_MODELS[idx].name;
+  const isClayton = DEFAULT_MODELS[idx]?.claytonTrim === true;
+  const sqft = DEFAULT_MODELS[idx]?.sqft || 0;
+  const effectiveTrim = isClayton ? 1600 : S.setup.trimUpgrade;
+  const st = Object.values(S.setup).reduce((a,b)=>a+b, 0) - S.setup.trimUpgrade + effectiveTrim;
+  const hard = S.lotCost + hc + st;
+  const propTax = Math.round(hard * (S.taxRate/100) * (S.loanMonths/12));
+  const ht = propTax + Object.values(S.holding).reduce((a,b)=>a+b, 0);
+  const buyTitle = Math.round(S.lotCost * BUY_TITLE);
+  const buyClosing = buyTitle + S.surveyAmount;
+  let loanAmt=0,loanByLTC=0,loanByLTV=0,ltc=0,ltv=0,orig=0,intr=0,tfin=0;
+  let downPayment=hard,cashToClose=hard+buyClosing;
+  if(S.financed){
+    loanByLTC=Math.round(hard*(S.ltcPct/100));
+    loanByLTV=Math.round(S.salePrice*(S.ltvCapPct/100));
+    loanAmt=Math.min(loanByLTC,loanByLTV);
+    ltc=loanAmt/hard;ltv=loanAmt/S.salePrice;
+    orig=loanAmt*(S.originationPts/100);
+    intr=(loanAmt*(S.interestRate/100)/12)*S.loanMonths;
+    tfin=orig+intr;
+    downPayment=hard-loanAmt;
+    cashToClose=downPayment+orig+buyClosing;
+  }
+  const comm=S.salePrice*S.commPct;
+  const sellTitle=Math.round(S.salePrice*SELL_TITLE);
+  const tsell=comm+sellTitle+S.sellerCredit;
+  const total=hard+tfin+ht+tsell;
+  const net=S.salePrice-total;
+  const roi=hard>0?net/hard:0;
+  const margin=S.salePrice>0?net/S.salePrice:0;
+  const coc=cashToClose>0?net/cashToClose:null;
+  const breakEven=Math.ceil((hard+tfin+ht+S.sellerCredit)/(1-S.commPct-SELL_TITLE));
+  // $/sqft metrics
+  const priceSqft=sqft>0?Math.round(S.salePrice/sqft):0;
+  const costSqft=sqft>0?Math.round(hard/sqft):0;
+  return{hc,modelName,st,ht,hard,loanAmt,loanByLTC,loanByLTV,ltc,ltv,
+    orig,intr,tfin,comm,sellTitle,tsell,total,net,downPayment,cashToClose,
+    buyTitle,buyClosing,roi,margin,propTax,breakEven,coc,effectiveTrim,isClayton,
+    sqft,priceSqft,costSqft};
+}
+
+function render(){document.getElementById("app").innerHTML=buildApp();}
+
+function buildApp(){
+  const c=recalc();
+  const good=c.net>=MINP,warn=c.net>=0&&c.net<MINP;
+  const dc=good?"#16a34a":warn?"#b45309":"#dc2626";
+  const dg=good?"0 0 0 3px rgba(22,163,74,0.15)":warn?"0 0 0 3px rgba(180,83,9,0.15)":"0 0 0 3px rgba(220,38,38,0.15)";
+  const il=good?"GO — Clears Threshold":warn?"Caution — Below $35K":"No Go — Negative Return";
+  const pc=good?"#16a34a":warn?"#b45309":"#dc2626";
+
+  const modeBtn=(m,label)=>`<button onclick="S.mode='${m}';saveState();render()" style="font-size:0.72rem;font-family:'Inter',sans-serif;font-weight:${S.mode===m?'600':'400'};padding:0.4rem 0.85rem;border-radius:6px;border:none;background:${S.mode===m?"var(--text)":"transparent"};color:${S.mode===m?"#fff":"var(--text-3)"};transition:all 0.15s;min-height:36px;-webkit-tap-highlight-color:transparent">${label}</button>`;
+
+  return`<div class="app"><div class="inner">
+  <!-- App Header -->
+  <div style="text-align:center;padding:0.5rem 0 1.2rem;margin-bottom:0.6rem">
+    <div style="margin:0 auto 0.5rem"><img src="data:image/png;base64,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" alt="Range Land Group" style="height:52px;width:auto" /></div>
+    <div style="font-size:0.72rem;color:var(--text-3);letter-spacing:0.15em;text-transform:uppercase;font-weight:400;margin-bottom:1rem">Deal Calculator</div>
+    <div style="display:inline-flex;align-items:center;gap:0.5rem">
+      <button onclick="saveDeal()" style="font-size:0.68rem;font-family:'Inter',sans-serif;padding:0.4rem 0.85rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);min-height:34px">Save</button>
+      ${S.savedDeals&&S.savedDeals.length?`<button onclick="showDealManager()" style="font-size:0.68rem;font-family:'Inter',sans-serif;padding:0.4rem 0.85rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);min-height:34px">Deals (${S.savedDeals.length})</button>`:""}
+      <button onclick="if(confirm('Reset all values to defaults?'))resetState()" style="font-size:0.68rem;font-family:'Inter',sans-serif;padding:0.4rem 0.85rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-3);min-height:34px">Reset</button>
+      <div class="hdr-badge">v4.2</div>
+    </div>
+  </div>
+    <!-- Mode tabs — full width row -->
+  <div style="display:flex;gap:0.25rem;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.25rem;margin-bottom:2rem;overflow-x:auto;-webkit-overflow-scrolling:touch">
+    ${modeBtn('quick','Quick')}${modeBtn('full','Full')}${modeBtn('compare','Compare')}${modeBtn('buyer','Mortgage')}${modeBtn('subdivide','Land')}
+  </div>
+
+  ${S.mode==='quick' ? buildQuickMode(c,pc,dc,dg,il) : S.mode==='compare' ? buildCompareMode() : S.mode==='buyer' ? buildBuyerMode() : S.mode==='subdivide' ? buildSubdivideMode() : buildFullMode(c,pc,dc,dg,il)}
+
+  </div></div>`;
+}
+
+/* ═══════════════════════════════════════════
+   FULL MODE
+   ═══════════════════════════════════════════ */
+function buildFullMode(c,pc,dc,dg,il){
+
+  return`
+  <div class="grid">
+  <div>
+  <!-- ── LEFT ── -->
+    <div class="section">
+      <div class="sec-label">Deal Info</div>
+      <div class="field">
+        <div class="field-lbl">Deal Name</div>
+        <input class="field-inp" style="padding-left:0.75rem" type="text" value="${esc(S.dealName)}"
+          placeholder="e.g. Alvarado Lot 3"
+          onblur="S.dealName=this.value;saveState();render()"
+          onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+      <div class="field">
+        <div class="field-lbl">Property Address</div>
+        <input class="field-inp" style="padding-left:0.75rem" type="text" value="${esc(S.dealAddress)}"
+          placeholder="e.g. 4200 County Rd 107, Alvarado TX"
+          onblur="S.dealAddress=this.value;saveState();render()"
+          onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+      <div class="field">
+        <div class="field-lbl">Notes</div>
+        <textarea style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.75rem;color:var(--text);font-family:'Inter',sans-serif;font-size:0.82rem;outline:none;resize:vertical;min-height:60px;-webkit-appearance:none;line-height:1.5"
+          placeholder="Seller motivation, easements, variance needed…"
+          onblur="S.notes=this.value;saveState();render()"
+          onkeydown="if(event.key==='Enter'&&event.shiftKey)this.blur()">${esc(S.notes)}</textarea>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Home Model</div>
+      ${DEFAULT_MODELS.map((m,i)=>{
+        const isCustom=i===DEFAULT_MODELS.length-1;
+        const activeCost=isCustom?S.customHome:S.modelCosts[i];
+        const defaultCost=m.cost;
+        const isActive=S.homeIdx===i;
+        const defaultNote=(!isCustom&&isActive&&activeCost!==defaultCost)?`<div style="font-size:0.6rem;color:var(--accent);text-align:right;margin-top:-0.2rem;margin-bottom:0.4rem;padding-right:0.2rem">default: ${fmt(defaultCost)}</div>`:"";
+        const costInput=!isCustom?`<div style="position:relative">
+          <span style="position:absolute;left:0.5rem;top:50%;transform:translateY(-50%);color:var(--text-3);font-family:var(--mono);font-size:0.75rem;pointer-events:none">$</span>
+          <input style="width:100%;height:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:0 0.4rem 0 1.3rem;color:var(--text);font-family:var(--mono);font-size:0.82rem;outline:none;-webkit-appearance:none;min-height:38px;"
+            type="tel" inputmode="numeric" value="${activeCost}"
+            onblur="S.modelCosts[${i}]=parseInt(this.value.replace(/[^0-9]/g,''))||${defaultCost};saveState();render()"
+            onkeydown="if(event.key==='Enter')this.blur()" />
+        </div>`:"";
+        return `<div style="display:grid;grid-template-columns:1fr${!isCustom?" 90px":""};gap:0.4rem;margin-bottom:0.4rem;align-items:stretch">
+          <button class="model-btn${isActive?" active":""}" onclick="S.homeIdx=${i};saveState();render()">
+            <span>${m.name}${m.sqft?` <span style='font-size:0.65rem;color:var(--text-3);font-weight:400'>${m.sqft.toLocaleString()} sf</span>`:""}</span>
+            <span class="model-price">${isCustom?"—":fmt(activeCost)}</span>
+          </button>
+          ${costInput}
+        </div>${defaultNote}`;
+      }).join("")}
+      ${S.homeIdx===DEFAULT_MODELS.length-1?`
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:0.7rem">
+          <div class="field">
+            <div class="field-lbl">Model Name</div>
+            <input class="field-inp" style="padding-left:0.75rem" type="text" value="${esc(S.customHomeName)}"
+              onblur="S.customHomeName=this.value||'Custom Model';saveState();render()"
+              onkeydown="if(event.key==='Enter')this.blur()" />
+          </div>
+          <div class="field">
+            <div class="field-lbl">Cost</div>
+            <div class="field-row"><span class="field-pre">$</span>
+              <input class="field-inp" type="tel" inputmode="numeric" value="${S.customHome}"
+                onblur="S.customHome=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+                onkeydown="if(event.key==='Enter')this.blur()" />
+            </div>
+          </div>
+        </div>`:""}
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Deal Variables</div>
+      ${nf("Lot Cost","S.lotCost")}
+      <div class="field">
+        <div class="field-lbl">Sale Price / ARV</div>
+        <div class="field-row"><span class="field-pre">$</span>
+          <input class="field-inp" type="tel" inputmode="numeric" value="${S.salePrice}"
+            onblur="S.salePrice=parseInt(this.value.replace(/[^0-9]/g,''))||0;S.quickArvOverride=true;saveState();render()"
+            onkeydown="if(event.key==='Enter')this.blur()" />
+        </div>
+        ${c.sqft?`<div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem;font-family:var(--mono)">$${c.priceSqft.toLocaleString()}/sqft sale · $${c.costSqft.toLocaleString()}/sqft cost · ${c.sqft.toLocaleString()} sqft home</div>`:""}
+      </div>
+      ${nf("Seller Credit to Buyer","S.sellerCredit")}
+      ${S.sellerCredit>0?`<div style="font-size:0.68rem;color:var(--text-3);margin-top:-0.3rem;margin-bottom:0.6rem">${fmtP(S.sellerCredit/S.salePrice)} of sale price</div>`:""}
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Commission</div>
+      <div class="tg" style="grid-template-columns:1fr 1fr 1fr">
+        ${[0.06,0.03,0].map(p=>`<button class="tg-btn${S.commPct===p?" active":""}" style="min-height:44px" onclick="S.commPct=${p};saveState();render()">${p===0?"0%":p*100+"%"}</button>`).join("")}
+      </div>
+      <div style="display:flex;justify-content:space-between;padding-top:0.65rem;margin-top:0.6rem;border-top:1px solid var(--border)">
+        <span style="font-size:0.8rem;color:var(--text-3)">Commission Amount</span>
+        <span style="font-family:var(--mono);font-size:0.82rem;color:var(--text);font-weight:500">${fmt(c.comm)}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+        <div class="sec-label" style="margin-bottom:0">Financing</div>
+        <div style="display:flex;gap:0;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.2rem">
+          <button onclick="S.financed=true;saveState();render()" style="font-size:0.72rem;font-family:'Inter',sans-serif;font-weight:${S.financed?"600":"400"};min-height:36px;padding:0 1rem;border-radius:6px;border:none;background:${S.financed?"var(--surface)":"transparent"};color:${S.financed?"var(--text)":"var(--text-3)"};box-shadow:${S.financed?"0 1px 3px rgba(0,0,0,0.1)":"none"};transition:all 0.15s">Financed</button>
+          <button onclick="S.financed=false;saveState();render()" style="font-size:0.72rem;font-family:'Inter',sans-serif;font-weight:${!S.financed?"600":"400"};min-height:36px;padding:0 1rem;border-radius:6px;border:none;background:${!S.financed?"#f0fdf4":"transparent"};color:${!S.financed?"#16a34a":"var(--text-3)"};box-shadow:${!S.financed?"0 1px 3px rgba(0,0,0,0.1)":"none"};transition:all 0.15s">Cash Deal</button>
+        </div>
+      </div>
+      ${S.financed?`
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.9rem">
+        <div><div class="field-lbl">Interest Rate</div><div style="position:relative"><input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.5rem 0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="decimal" value="${S.interestRate}" onblur="S.interestRate=parseFloat(this.value)||12;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none">%</span></div><div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">Default: 12%</div></div>
+        <div><div class="field-lbl">Origination Points</div><div style="position:relative"><input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 2rem 0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="decimal" value="${S.originationPts}" onblur="S.originationPts=parseFloat(this.value)||2.5;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none">pts</span></div><div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">Default: 2.5 pts</div></div>
+        <div><div class="field-lbl">LTC % (Lender covers)</div><div style="position:relative"><input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.5rem 0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="decimal" value="${S.ltcPct}" onblur="S.ltcPct=parseFloat(this.value)||90;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none">%</span></div><div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">Default: 90%</div></div>
+        <div><div class="field-lbl">LTV Cap (Max of ARV)</div><div style="position:relative"><input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.5rem 0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="decimal" value="${S.ltvCapPct}" onblur="S.ltvCapPct=parseFloat(this.value)||70;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none">%</span></div><div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">Default: 70%</div></div>
+      </div>
+      <div style="background:${c.loanAmt===c.loanByLTV?"#fffbeb":"#f0fdf4"};border:1px solid ${c.loanAmt===c.loanByLTV?"#fde68a":"#bbf7d0"};border-radius:6px;padding:0.6rem 0.8rem;margin-bottom:0.8rem;font-size:0.68rem;color:${c.loanAmt===c.loanByLTV?"#b45309":"#15803d"}">
+        ${c.loanAmt===c.loanByLTV?`⚠ LTV cap constrains loan — lender limited to ${fmt(c.loanByLTV)} (${S.ltvCapPct}% of ARV)`:`✓ LTC drives loan — ${fmt(c.loanAmt)} (${S.ltcPct}% of hard cost)`}
+      </div>
+      <div class="tg" style="grid-template-columns:repeat(6,1fr)">
+        ${[3,4,5,6,7,8].map(m=>`<button class="tg-btn${S.loanMonths===m?" active":""}" style="min-height:44px" onclick="S.loanMonths=${m};saveState();render()">${m}mo</button>`).join("")}
+      </div>
+      <div style="margin-top:0.8rem">
+        <div class="inline-row"><span class="inline-lbl">Loan Amount</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(c.loanAmt)}</span></div>
+        <div class="inline-row"><span class="inline-lbl">Origination (${S.originationPts} pts)</span><span class="inline-val">${fmt(c.orig)}</span></div>
+        <div class="inline-row"><span class="inline-lbl">Interest (${S.loanMonths} mo @ ${S.interestRate}%)</span><span class="inline-val">${fmt(c.intr)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding-top:0.5rem;margin-top:0.1rem">
+          <span style="font-size:0.83rem;font-weight:600;color:var(--text)">Total Financing</span>
+          <span style="font-family:var(--mono);font-size:0.83rem;font-weight:600;color:var(--text)">${fmt(c.tfin)}</span>
+        </div>
+      </div>`
+      :`<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.85rem 1rem;font-size:0.78rem;color:#15803d;font-weight:500">✓ Cash deal — no financing costs. Total all-in = hard cost + holding + selling.</div>`}
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Holding Costs</div>
+      <div style="background:var(--accent-light);border:1px solid var(--accent-border);border-radius:8px;padding:0.85rem 0.9rem;margin-bottom:0.8rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.6rem">
+          <div><div style="font-size:0.72rem;font-weight:600;color:var(--accent)">Property Taxes</div><div style="font-size:0.65rem;color:var(--text-3);margin-top:0.15rem">Auto-calculated · adjusts with loan term</div></div>
+          <div style="font-family:var(--mono);font-size:0.95rem;font-weight:600;color:var(--accent)">${fmt(c.propTax)}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.6rem">
+          <span style="font-size:0.72rem;color:var(--text-2);white-space:nowrap">Tax Rate</span>
+          <div style="position:relative;width:90px;flex-shrink:0"><input style="width:100%;background:#fff;border:1px solid var(--accent-border);border-radius:6px;padding:0.32rem 1.4rem 0.32rem 0.5rem;color:var(--text);font-family:var(--mono);font-size:0.8rem;outline:none;text-align:right" type="tel" inputmode="decimal" value="${S.taxRate}" onblur="S.taxRate=parseFloat(this.value)||1.85;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);pointer-events:none">%</span></div>
+          <span style="font-size:0.68rem;color:var(--text-3)">${fmt(c.hard)} × ${S.taxRate}% × ${S.loanMonths}/12 mo</span>
+        </div>
+      </div>
+      ${hl("insurance","Insurance")}${hl("maintenance","Maintenance")}${hl("hoa","HOA / POA")}${hl("utilities","Utilities")}
+      <div class="sl">
+        <input class="sl-lbl-inp" value="${esc(S.hcLbl)}" onblur="S.hcLbl=this.value;saveState();render()" />
+        <div class="sl-wrap"><span class="sl-pre">$</span><input class="sl-inp" type="tel" inputmode="numeric" value="${S.holding.custom}" onblur="S.holding.custom=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /></div>
+      </div>
+      <div class="sl-total"><span class="sl-total-lbl">Total Holding</span><span class="sl-total-val">${fmt(c.ht)}</span></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Setup & Utility Costs</div>
+      <div class="sub-label">Site Work</div>
+      ${sl("housePad","House Pad")}${sl("driveway","Driveway Base")}${sl("culvert","Culvert")}${sl("grading","Final Grade")}
+      <div class="sub-label">Utilities</div>
+      ${sl("septic","Septic System")}${sl("plumbing","Plumbing to Septic")}${sl("waterLine","Water Line")}${sl("electric","Electric (Underground)")}${sl("electricPost","Electrical Post")}
+      <div class="sub-label">Home Setup</div>
+      ${sl("setLevel","Set & Level")}
+      <div class="sl">
+        <span class="sl-lbl">Interior Trim${c.isClayton?` <span style="font-size:0.58rem;color:var(--accent);font-family:'Inter',sans-serif;font-weight:600">AUTO</span>`:""}</span>
+        <div class="sl-wrap"><span class="sl-pre">$</span>
+          <input class="sl-inp" type="tel" inputmode="numeric" value="${c.effectiveTrim}"
+            style="${c.isClayton?`background:var(--accent-light);border-color:var(--accent-border);color:var(--accent);`:``}"
+            ${c.isClayton?"readonly":""}
+            onblur="${c.isClayton?"":"S.setup.trimUpgrade=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"}"
+            onkeydown="if(event.key==='Enter')this.blur()" />
+        </div>
+      </div>
+      ${sl("fhaRetrofit","FHA Retrofit")}${sl("skirting","Skirting")}${sl("decks","Decks")}${sl("hvac","HVAC")}${sl("demo","Demo / Teardown")}
+      <div class="sub-label">Custom</div>
+      <div class="sl">
+        <input class="sl-lbl-inp" value="${esc(S.c1lbl)}" onblur="S.c1lbl=this.value;saveState();render()" />
+        <div class="sl-wrap"><span class="sl-pre">$</span><input class="sl-inp" type="tel" inputmode="numeric" value="${S.setup.custom1}" onblur="S.setup.custom1=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /></div>
+      </div>
+      <div class="sl">
+        <input class="sl-lbl-inp" value="${esc(S.c2lbl)}" onblur="S.c2lbl=this.value;saveState();render()" />
+        <div class="sl-wrap"><span class="sl-pre">$</span><input class="sl-inp" type="tel" inputmode="numeric" value="${S.setup.custom2}" onblur="S.setup.custom2=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /></div>
+      </div>
+      <div class="sub-label">Contingency</div>
+      ${sl("contingency","Contingency / Buffer")}
+      <div class="sl-total"><span class="sl-total-lbl">Total Setup</span><span class="sl-total-val">${fmt(c.st)}</span></div>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT ── -->
+  <div>
+
+    <div class="indicator">
+      <div class="ind-dot" style="background:${dc};box-shadow:${dg}"></div>
+      <div><div class="ind-label" style="color:${dc}">${il}</div><div class="ind-sub">Minimum threshold: $35,000 net</div></div>
+    </div>
+
+    <div class="profit-card">
+      <div class="profit-lbl">Net Profit</div>
+      <div class="profit-val" style="color:${pc}">${fmt(c.net)}</div>
+      ${c.sqft?`<div style="font-size:0.72rem;color:var(--text-3);margin-top:0.5rem;font-family:var(--mono)">$${c.priceSqft}/sqft sale · $${c.costSqft}/sqft cost · ${c.sqft.toLocaleString()} sf</div>`:""}
+      <div class="profit-meta">
+        <div class="meta-item"><div class="meta-lbl">Margin</div><div class="meta-val">${fmtP(c.margin)}</div></div>
+        <div class="meta-item"><div class="meta-lbl">ROI</div><div class="meta-val">${fmtP(c.roi)}</div></div>
+        <div class="meta-item"><div class="meta-lbl">CoC Return</div><div class="meta-val" style="color:${c.coc>=0.5?"#16a34a":c.coc>=0.2?"#b45309":"#111"}">${c.coc!==null?fmtP(c.coc):"—"}</div></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.85rem 0.7rem;text-align:center">
+        <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.35rem">LTV</div>
+        <div style="font-family:var(--mono);font-size:1.15rem;font-weight:600;color:${c.ltv<=0.65?"#16a34a":c.ltv<=0.75?"#b45309":"#dc2626"}">${S.financed?fmtP(c.ltv):"—"}</div>
+        <div style="font-size:0.58rem;color:var(--text-3);margin-top:0.25rem">${S.financed?(c.ltv<=0.65?"✓ Strong":c.ltv<=0.75?"Acceptable":"High Risk"):"Cash deal"}</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.85rem 0.7rem;text-align:center">
+        <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.35rem">Break-Even</div>
+        <div style="font-family:var(--mono);font-size:1rem;font-weight:500;color:var(--text)">${fmt(c.breakEven)}</div>
+        <div style="font-size:0.58rem;color:var(--text-3);margin-top:0.25rem">${fmt(S.salePrice-c.breakEven)} cushion</div>
+      </div>
+    </div>
+    <div style="background:var(--accent-light);border:1px solid var(--accent-border);border-radius:8px;padding:0.85rem 1rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div><div style="font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Est. Cash to Close</div><div style="font-size:0.65rem;color:var(--text-3);margin-top:0.15rem">CoC Return: ${c.coc!==null?fmtP(c.coc):"—"}</div></div>
+      <div style="font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--accent)">${fmt(c.cashToClose)}</div>
+    </div>
+
+    <!-- Cash to Close breakdown -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;margin-bottom:1.5rem">
+      <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.7rem">Cash to Close Breakdown</div>
+      ${S.financed?`
+      <div class="inline-row"><span class="inline-lbl">Hard Cost</span><span class="inline-val">${fmt(c.hard)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Loan Amount</span><span class="inline-val" style="color:var(--accent)">− ${fmt(c.loanAmt)}</span></div>
+      <div class="inline-row" style="border-bottom:1px solid var(--border-strong)"><span class="inline-lbl" style="font-weight:600;color:var(--text)">Down Payment</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(c.downPayment)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Origination Fee</span><span class="inline-val">${fmt(c.orig)}</span></div>`
+      :`<div class="inline-row"><span class="inline-lbl">Hard Cost (full cash)</span><span class="inline-val">${fmt(c.hard)}</span></div>`}
+      <div class="inline-row"><span class="inline-lbl">Buy-Side Title (0.5% of lot)</span><span class="inline-val">${fmt(c.buyTitle)}</span></div>
+      <div class="inline-row">
+        <span class="inline-lbl">Survey</span>
+        <div style="position:relative;width:88px;flex-shrink:0"><span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+          <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:0.28rem 0.4rem 0.28rem 1.1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right;" type="tel" inputmode="numeric" value="${S.surveyAmount}" onblur="S.surveyAmount=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:0.6rem;margin-top:0.4rem;border-top:2px solid var(--text)">
+        <span style="font-size:0.85rem;font-weight:700;color:var(--text)">Est. Cash to Close</span>
+        <span style="font-family:var(--mono);font-size:0.92rem;font-weight:700;color:var(--accent)">${fmt(c.cashToClose)}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Cost Stack</div>
+      ${cr("Sale Price / ARV",fmt(S.salePrice),false,true)}
+      ${c.sqft?cr("","$"+c.priceSqft+"/sqft · "+c.sqft.toLocaleString()+" sf",true):""}
+      <div class="cs-div"></div>
+      <div class="cs-cat">Hard Costs</div>
+      ${cr("Lot / Land",fmt(S.lotCost),true)}
+      ${cr(`Home — ${c.modelName}`,fmt(c.hc),true)}
+      ${cr("Setup & Utilities",fmt(c.st - S.setup.contingency),true)}
+      ${cr("Contingency / Buffer",fmt(S.setup.contingency),true)}
+      ${cr("Total Hard",fmt(c.hard),false,true)}
+      ${c.sqft?cr("","$"+c.costSqft+"/sqft all-in cost",true):""}
+      ${S.financed?`
+      <div class="cs-cat">Financing</div>
+      ${cr(`Origination (${S.originationPts} pts)`,fmt(c.orig),true)}
+      ${cr(`Interest · ${S.loanMonths}mo @ ${S.interestRate}%`,fmt(c.intr),true)}
+      ${cr("Total Financing",fmt(c.tfin),false,true)}`
+      :`<div class="cs-cat" style="color:#15803d">No Financing — Cash Deal</div>`}
+      <div class="cs-cat">Holding Costs</div>
+      ${cr(`Property Taxes (${S.taxRate}% · ${S.loanMonths}mo)`,fmt(c.propTax),true)}
+      ${S.holding.insurance?cr("Insurance",fmt(S.holding.insurance),true):""}
+      ${S.holding.maintenance?cr("Maintenance",fmt(S.holding.maintenance),true):""}
+      ${S.holding.hoa?cr("HOA / POA",fmt(S.holding.hoa),true):""}
+      ${S.holding.utilities?cr("Utilities",fmt(S.holding.utilities),true):""}
+      ${S.holding.custom?cr(S.hcLbl,fmt(S.holding.custom),true):""}
+      ${cr("Total Holding",fmt(c.ht),false,true)}
+      <div class="cs-cat">Selling</div>
+      ${cr(`Commission (${S.commPct*100}%)`,fmt(c.comm),true)}
+      ${cr("Sale Title Fees (1%)",fmt(c.sellTitle),true)}
+      ${S.sellerCredit?cr("Seller Credit",fmt(S.sellerCredit),true):""}
+      ${cr("Total Selling",fmt(c.tsell),false,true)}
+      <div class="cs-div"></div>
+      ${cr("Total All-In",fmt(c.total),false,true)}
+      <div class="cs-net"><span class="cs-net-lbl">Net Profit</span><span class="cs-net-val" style="color:${pc}">${fmt(c.net)}</span></div>
+    </div>
+
+    ${S.financed?`
+    <div class="section">
+      <div class="sec-label">Profit vs. Loan Term</div>
+      ${[3,4,5,6,7,8].map(mo=>{
+        const itr=(c.loanAmt*(S.interestRate/100)/12)*mo;
+        const fin=c.orig+itr;const net=S.salePrice-c.hard-fin-c.ht-c.tsell;
+        const base=S.salePrice-c.hard-(c.orig+(c.loanAmt*(S.interestRate/100)/12)*3)-c.ht-c.tsell;
+        const w=Math.max(3,Math.min(100,base>0?(net/base)*100:4));
+        const fc=net>=MINP?"#16a34a":net>=0?"#b45309":"#dc2626";const a=mo===S.loanMonths;
+        return`<div class="sens-row"><span class="sens-lbl${a?" a":""}">${mo}mo</span><div class="sens-track"><div class="sens-fill" style="width:${w}%;background:${a?fc:"#d4d4d8"}"></div></div><span class="sens-val${a?" a":""}" style="color:${a?fc:"var(--text-3)"}">${fmt(net)}</span></div>`;
+      }).join("")}
+    </div>`:""}
+
+    <div class="section">
+      <div class="sec-label">Profit vs. Sale Price</div>
+      ${[-20000,-10000,0,10000,20000].map(d=>{
+        const sp=S.salePrice+d;const net=sp-c.hard-c.tfin-c.ht-(sp*S.commPct+sp*SELL_TITLE+S.sellerCredit);
+        const base=(S.salePrice+20000)-c.hard-c.tfin-c.ht-((S.salePrice+20000)*S.commPct+(S.salePrice+20000)*SELL_TITLE+S.sellerCredit);
+        const w=Math.max(3,Math.min(100,base>0?(net/base)*100:4));
+        const fc=net>=MINP?"#16a34a":net>=0?"#b45309":"#dc2626";const a=d===0;
+        return`<div class="sens-row"><span class="sens-lbl${a?" a":""}">${d===0?"Base":d>0?"+"+d/1000+"k":d/1000+"k"}</span><div class="sens-track"><div class="sens-fill" style="width:${w}%;background:${a?fc:"#d4d4d8"}"></div></div><span class="sens-val${a?" a":""}" style="color:${a?fc:"var(--text-3)"}">${fmt(net)}</span></div>`;
+      }).join("")}
+    </div>
+
+    <div class="section">
+      <div class="sec-label">Profit by Home Model</div>
+      <div style="font-size:0.68rem;color:var(--text-3);margin-bottom:0.9rem">Same lot · same variables · swap home only</div>
+      ${(()=>{
+        const results=DEFAULT_MODELS.filter(m=>m.cost>0).map(m=>{
+          const idx=DEFAULT_MODELS.indexOf(m);
+          const r=recalcFor(idx);
+          return{name:m.name,cost:S.modelCosts[idx],net:r.net,isCurrent:idx===S.homeIdx,sqft:m.sqft,priceSqft:r.priceSqft};
+        }).sort((a,b)=>b.net-a.net);
+        const maxNet=Math.max(...results.map(r=>r.net));
+        const minNet=Math.min(...results.map(r=>r.net));
+        const range=maxNet-minNet||1;
+        return results.map((r,i)=>{
+          const fc=r.net>=MINP?"#16a34a":r.net>=0?"#b45309":"#dc2626";
+          const w=Math.max(4,Math.round(((r.net-minNet)/range)*90)+10);
+          return`<div style="margin-bottom:0.55rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem">
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <span style="font-size:0.72rem;color:${r.isCurrent?"var(--accent)":"var(--text-2)"};font-weight:${r.isCurrent?"600":"400"}">${r.name}</span>
+                ${r.isCurrent?`<span style="font-size:0.55rem;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);border-radius:3px;padding:0.08rem 0.35rem;font-family:var(--mono);font-weight:600">SELECTED</span>`:""}
+                ${i===0&&!r.isCurrent?`<span style="font-size:0.55rem;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:3px;padding:0.08rem 0.35rem;font-family:var(--mono);font-weight:600">BEST</span>`:""}
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem">
+                <span style="font-size:0.6rem;color:var(--text-3);font-family:var(--mono)">${r.sqft?'$'+r.priceSqft+'/sf':''}</span>
+                <span style="font-size:0.65rem;color:var(--text-3);font-family:var(--mono)">${fmt(r.cost)}</span>
+                <span style="font-family:var(--mono);font-size:0.78rem;font-weight:600;color:${fc};min-width:5rem;text-align:right">${fmt(r.net)}</span>
+              </div>
+            </div>
+            <div class="sens-track"><div class="sens-fill" style="width:${w}%;background:${r.isCurrent?fc:"var(--border-strong)"}"></div></div>
+          </div>`;
+        }).join("");
+      })()}
+    </div>
+
+    </div>
+
+  </div>
+  </div>
+  <div style="max-width:880px;margin:2rem auto 0;padding:0 1.5rem;display:flex;flex-direction:column;gap:0.6rem">
+    <button onclick="printPDF()" style="width:100%;background:var(--text);border:none;border-radius:10px;color:#fff;padding:1rem;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.02em;display:flex;align-items:center;justify-content:center;gap:0.6rem">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+      Print Lender Summary — PDF
+    </button>
+    <button onclick="generateMemo('home')" style="width:100%;background:var(--accent);border:none;border-radius:10px;color:#fff;padding:1rem;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.02em;display:flex;align-items:center;justify-content:center;gap:0.6rem">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4v1a1 1 0 01-1 1H9a1 1 0 01-1-1V6a4 4 0 014-4z"/><path d="M8 7v3a4 4 0 008 0V7"/><path d="M12 14v4m-4 2h8"/></svg>
+      Generate AI Deal Memo
+    </button>
+  </div>
+  `; // end buildFullMode
+}
+
+/* ═══════════════════════════════════════════
+   QUICK MODE — linked to full mode state
+   ═══════════════════════════════════════════ */
+function buildQuickMode(c,pc,dc,dg,il){
+  const ARV_ANCHORS=[{ac:1,arv:255000},{ac:2,arv:270000},{ac:3,arv:310000},{ac:4,arv:375000},{ac:5,arv:400000}];
+  function autoARV(acres){
+    if(acres<=ARV_ANCHORS[0].ac)return ARV_ANCHORS[0].arv;
+    if(acres>=ARV_ANCHORS[ARV_ANCHORS.length-1].ac)return ARV_ANCHORS[ARV_ANCHORS.length-1].arv;
+    for(let i=0;i<ARV_ANCHORS.length-1;i++){
+      const a=ARV_ANCHORS[i],b=ARV_ANCHORS[i+1];
+      if(acres>=a.ac&&acres<=b.ac){const t=(acres-a.ac)/(b.ac-a.ac);return Math.round((a.arv+t*(b.arv-a.arv))/5000)*5000;}
+    }
+    return 275000;
+  }
+
+  const arvIsAuto=!S.quickArvOverride;
+  const displayARV=arvIsAuto?autoARV(S.quickAcres):S.salePrice;
+  if(arvIsAuto&&displayARV!==S.salePrice){S.salePrice=displayARV;}
+
+  // Auto-select model based on acres (if user hasn't manually picked)
+  const autoIdx=S.quickAcres<=2?1:0;
+  // Use S.homeIdx directly — linked to full mode
+  const qIdx=S.homeIdx;
+  const qModel=DEFAULT_MODELS[qIdx];
+  const qHomeCost=qIdx===DEFAULT_MODELS.length-1?S.customHome:S.modelCosts[qIdx];
+  const qTrim=qModel.claytonTrim?1600:S.setup.trimUpgrade;
+  const qSt=Object.values(S.setup).reduce((a,b)=>a+b,0)-S.setup.trimUpgrade+qTrim;
+
+  // Back-calculate max lot offer (5-pass convergence)
+  let lotEst=S.salePrice*0.2;
+  for(let i=0;i<5;i++){
+    const hardEst=lotEst+qHomeCost+qSt;
+    const propTaxEst=hardEst*(S.taxRate/100)*(S.loanMonths/12);
+    const htEst=propTaxEst+Object.values(S.holding).reduce((a,b)=>a+b,0);
+    let tfinEst=0;
+    if(S.financed){
+      const loanEst=Math.min(hardEst*(S.ltcPct/100),S.salePrice*(S.ltvCapPct/100));
+      tfinEst=loanEst*(S.originationPts/100)+(loanEst*(S.interestRate/100)/12)*S.loanMonths;
+    }
+    const tsellEst=S.salePrice*S.commPct+Math.round(S.salePrice*SELL_TITLE)+S.sellerCredit;
+    lotEst=S.salePrice-qHomeCost-qSt-tfinEst-htEst-tsellEst-S.quickTargetProfit;
+  }
+  const maxOffer=Math.floor(lotEst/1000)*1000;
+  const good=maxOffer>0,warn=maxOffer>-20000&&maxOffer<=0;
+  const oc=good?"#16a34a":warn?"#b45309":"#dc2626";
+
+  const stepper=(val,step,onDec,onInc,display)=>`
+    <div style="display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface)">
+      <button onclick="${onDec}" style="width:52px;height:52px;font-size:1.3rem;font-weight:300;background:transparent;border:none;color:var(--text-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent">−</button>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:1.1rem;font-weight:500;color:var(--text);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:0.9rem 0.5rem">${display}</div>
+      <button onclick="${onInc}" style="width:52px;height:52px;font-size:1.3rem;font-weight:300;background:transparent;border:none;color:var(--text-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent">+</button>
+    </div>`;
+
+  // Quick cost items — writes directly to S.setup
+  const qCostItem=(key,label,val)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:0.78rem;color:var(--text-2)">${label}</span>
+      <div style="position:relative;width:90px;flex-shrink:0">
+        <span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+        <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.32rem 0.4rem 0.32rem 1.1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+          type="tel" inputmode="numeric" value="${val}"
+          onblur="S.setup['${key}']=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+          onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+    </div>`;
+
+  return`
+  <div style="max-width:480px;margin:0 auto;padding-top:0.5rem">
+
+    <!-- Deal name -->
+    <div style="margin-bottom:0.85rem">
+      <input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;color:var(--text);font-family:'Inter',sans-serif;font-size:0.85rem;outline:none;-webkit-appearance:none;font-weight:500"
+        type="text" value="${esc(S.dealName)}" placeholder="Deal name…"
+        onblur="S.dealName=this.value;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" />
+    </div>
+
+    <!-- Lot size -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Lot Size</span>
+        <span style="font-family:var(--mono);font-size:1.6rem;font-weight:300;color:var(--text);line-height:1">${S.quickAcres}<span style="font-size:0.9rem;color:var(--text-3);margin-left:0.3rem">ac</span></span>
+      </div>
+      <input type="range" min="1" max="20" step="0.5" value="${S.quickAcres}"
+        style="width:100%;accent-color:var(--accent);height:6px;border-radius:3px;cursor:pointer"
+        oninput="S.quickAcres=parseFloat(this.value);S.quickArvOverride=false;saveState();render()" />
+      <div style="display:flex;justify-content:space-between;margin-top:0.5rem;font-size:0.62rem;color:var(--text-3)"><span>1</span><span>5</span><span>10</span><span>15</span><span>20 ac</span></div>
+    </div>
+
+    <!-- ARV -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.9rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Sale Price / ARV</span>
+        ${arvIsAuto?`<span style="font-size:0.6rem;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);border-radius:4px;padding:0.15rem 0.5rem;font-weight:600;font-family:var(--mono)">AUTO</span>`
+        :`<button onclick="S.quickArvOverride=false;saveState();render()" style="font-size:0.6rem;color:var(--text-3);background:none;border:1px solid var(--border);border-radius:4px;padding:0.15rem 0.5rem;font-family:'Inter',sans-serif">Reset to auto</button>`}
+      </div>
+      ${stepper(S.salePrice,5000,
+        `S.salePrice=Math.max(50000,S.salePrice-5000);S.quickArvOverride=true;saveState();render()`,
+        `S.salePrice=S.salePrice+5000;S.quickArvOverride=true;saveState();render()`,
+        fmt(S.salePrice))}
+      ${arvIsAuto?`<div style="font-size:0.62rem;color:var(--text-3);margin-top:0.6rem;text-align:center">Auto-estimated for ${S.quickAcres} ac · tap +/− to override</div>`:""}
+    </div>
+
+    <!-- Target profit -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Target Profit</span>
+        <span style="font-family:var(--mono);font-size:1.6rem;font-weight:300;color:${S.quickTargetProfit>=MINP?"var(--text)":"#dc2626"};line-height:1">${fmt(S.quickTargetProfit)}</span>
+      </div>
+      <input type="range" min="20000" max="120000" step="5000" value="${S.quickTargetProfit}"
+        style="width:100%;accent-color:var(--accent);height:6px;border-radius:3px;cursor:pointer"
+        oninput="S.quickTargetProfit=parseInt(this.value);saveState();render()" />
+      <div style="display:flex;justify-content:space-between;margin-top:0.5rem;font-size:0.62rem;color:var(--text-3)"><span>$20K</span><span>$45K floor</span><span>$70K</span><span>$95K</span><span>$120K</span></div>
+      ${S.quickTargetProfit<MINP?`<div style="font-size:0.65rem;color:#dc2626;margin-top:0.6rem;font-weight:500;text-align:center">⚠ Below $35K minimum threshold</div>`:""}
+    </div>
+
+    <!-- Home model selector -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Home Model</span>
+        <span style="font-size:0.62rem;color:var(--text-3)">Synced with Full mode</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+        ${DEFAULT_MODELS.filter(m=>m.cost>0).map(m=>{
+          const i=DEFAULT_MODELS.indexOf(m);
+          const isActive=i===qIdx;
+          return`<button onclick="S.homeIdx=${i};saveState();render()"
+            style="padding:0.75rem 0.6rem;min-height:52px;border-radius:9px;border:1.5px solid ${isActive?"var(--accent)":"var(--border)"};background:${isActive?"var(--accent-light)":"var(--surface)"};text-align:left;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent">
+            <div style="font-size:0.72rem;font-weight:${isActive?"600":"400"};color:${isActive?"var(--accent)":"var(--text-2)"}">${m.name}</div>
+            <div style="font-size:0.6rem;color:var(--text-3);font-family:var(--mono);margin-top:0.2rem">${fmt(S.modelCosts[i])}${m.sqft?" · "+m.sqft.toLocaleString()+" sf":""}</div>
+          </button>`;
+        }).join("")}
+      </div>
+    </div>
+
+    <!-- Additional Costs (collapsible) -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:0.85rem;overflow:hidden">
+      <button onclick="S.quickCostsOpen=!S.quickCostsOpen;saveState();render()"
+        style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.4rem;background:transparent;border:none;-webkit-tap-highlight-color:transparent">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Additional Costs</span>
+        <div style="display:flex;align-items:center;gap:0.6rem">
+          <span style="font-family:var(--mono);font-size:0.78rem;color:var(--text-2);font-weight:500">${fmt(S.setup.demo+S.setup.custom1+S.setup.custom2)}</span>
+          <span style="font-size:0.8rem;color:var(--text-3);transition:transform 0.2s;transform:rotate(${S.quickCostsOpen?"180":"0"}deg)">▾</span>
+        </div>
+      </button>
+      ${S.quickCostsOpen?`<div style="padding:0 1.4rem 1.2rem;border-top:1px solid var(--border)">
+        <div style="font-size:0.62rem;color:var(--text-3);margin:0.8rem 0 0.5rem">Common add-on costs — updates full calculator too</div>
+        ${qCostItem("demo","Demo / Teardown",S.setup.demo)}
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+          <input style="flex:1;background:transparent;border:1px solid transparent;border-radius:4px;padding:0.25rem 0.4rem;color:var(--text-2);font-size:0.78rem;outline:none;font-family:'Inter',sans-serif" value="${esc(S.c1lbl)}" onblur="S.c1lbl=this.value;saveState();render()" />
+          <div style="position:relative;width:90px;flex-shrink:0">
+            <span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+            <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.32rem 0.4rem 0.32rem 1.1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+              type="tel" inputmode="numeric" value="${S.setup.custom1}"
+              onblur="S.setup.custom1=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+              onkeydown="if(event.key==='Enter')this.blur()" />
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0">
+          <input style="flex:1;background:transparent;border:1px solid transparent;border-radius:4px;padding:0.25rem 0.4rem;color:var(--text-2);font-size:0.78rem;outline:none;font-family:'Inter',sans-serif" value="${esc(S.c2lbl)}" onblur="S.c2lbl=this.value;saveState();render()" />
+          <div style="position:relative;width:90px;flex-shrink:0">
+            <span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+            <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.32rem 0.4rem 0.32rem 1.1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+              type="tel" inputmode="numeric" value="${S.setup.custom2}"
+              onblur="S.setup.custom2=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+              onkeydown="if(event.key==='Enter')this.blur()" />
+          </div>
+        </div>
+      </div>`:""}
+    </div>
+
+    <!-- Max offer result -->
+    <div style="background:${good?"#f0fdf4":warn?"#fffbeb":"#fef2f2"};border:2px solid ${oc};border-radius:14px;padding:1.8rem 1.4rem 1.6rem;margin-bottom:1rem;text-align:center">
+      <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:${oc};opacity:0.8;margin-bottom:0.4rem">Max Lot Offer</div>
+      <div style="font-size:clamp(2.4rem,10vw,3.5rem);font-weight:300;letter-spacing:-0.03em;color:${oc};font-family:'Inter',sans-serif;line-height:1.1">${maxOffer>0?fmt(maxOffer):"No room"}</div>
+      <div style="font-size:0.73rem;color:${oc};margin-top:0.6rem;opacity:0.85">${good?"✓ Achieves "+fmt(S.quickTargetProfit)+" profit target":warn?"Tight — reduce target or increase ARV":"Deal doesn't pencil at this ARV"}</div>
+      <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid ${oc}25;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem">
+        <div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:0.06em;color:${oc};opacity:0.65;margin-bottom:0.2rem">Home Cost</div><div style="font-family:var(--mono);font-size:0.8rem;font-weight:500;color:${oc}">${fmt(qHomeCost)}</div></div>
+        <div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:0.06em;color:${oc};opacity:0.65;margin-bottom:0.2rem">Model</div><div style="font-size:0.7rem;font-weight:600;color:${oc}">${qModel.name.replace("Clayton ","").replace("TRU ","")}</div></div>
+        <div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:0.06em;color:${oc};opacity:0.65;margin-bottom:0.2rem">ARV</div><div style="font-family:var(--mono);font-size:0.8rem;font-weight:500;color:${oc}">${fmt(S.salePrice)}</div></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <button onclick="S.mode='full';saveState();render()" style="font-size:0.78rem;color:var(--accent);background:none;border:none;font-family:'Inter',sans-serif;padding:0.5rem 1rem;min-height:44px">Open full calculator →</button>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   COMPARE MODE — Head-to-Head
+   ═══════════════════════════════════════════ */
+function buildCompareMode(){
+  const models=DEFAULT_MODELS.filter(m=>m.cost>0);
+  const idxA=S.compareA;const idxB=S.compareB;
+  const a=recalcFor(idxA);const b=recalcFor(idxB);
+  const goodA=a.net>=MINP,goodB=b.net>=MINP;
+  const pcA=a.net>=MINP?"#16a34a":a.net>=0?"#b45309":"#dc2626";
+  const pcB=b.net>=MINP?"#16a34a":b.net>=0?"#b45309":"#dc2626";
+  const winner=a.net>b.net?"A":b.net>a.net?"B":"TIE";
+
+  const modelSelect=(side,currentIdx)=>`
+    <select onchange="S.compare${side}=parseInt(this.value);saveState();render()" style="width:100%;font-size:0.82rem;font-family:'Inter',sans-serif;padding:0.7rem 0.8rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px">
+      ${models.map(m=>{const i=DEFAULT_MODELS.indexOf(m);return`<option value="${i}"${i===currentIdx?" selected":""}>${m.name} — ${fmt(S.modelCosts[i])}</option>`;}).join("")}
+    </select>`;
+
+  const cmpRow=(label,valA,valB,hlA,hlB)=>`
+    <div class="cmp-row">
+      <span class="cmp-lbl" style="flex:1;text-align:right;padding-right:0.6rem;${hlA?"font-weight:600;color:var(--green)":""}">
+        ${typeof valA==='string'?valA:fmt(valA)}</span>
+      <span style="font-size:0.62rem;color:var(--text-3);width:5.5rem;text-align:center;flex-shrink:0">${label}</span>
+      <span class="cmp-val" style="flex:1;padding-left:0.6rem;${hlB?"font-weight:600;color:var(--green)":""}">
+        ${typeof valB==='string'?valB:fmt(valB)}</span>
+    </div>`;
+
+  return`
+  <div style="max-width:640px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Head-to-Head Comparison</div>
+      <div style="font-size:0.68rem;color:var(--text-3)">Same deal variables · Lot ${fmt(S.lotCost)} · ARV ${fmt(S.salePrice)} · ${S.financed?S.loanMonths+"mo financed":"Cash deal"}</div>
+    </div>
+
+    <!-- Model Selectors -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.8rem;align-items:center;margin-bottom:1.5rem">
+      <div>
+        <div style="font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.4rem;text-align:center">Model A</div>
+        ${modelSelect("A",idxA)}
+      </div>
+      <div style="font-size:0.82rem;font-weight:700;color:var(--text-3);padding-top:1rem">VS</div>
+      <div>
+        <div style="font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.4rem;text-align:center">Model B</div>
+        ${modelSelect("B",idxB)}
+      </div>
+    </div>
+
+    <!-- Net Profit Hero -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+      <div style="background:${winner==='A'?"#f0fdf4":"var(--surface)"};border:${winner==='A'?"2px solid #16a34a":"1px solid var(--border)"};border-radius:12px;padding:1.2rem;text-align:center">
+        ${winner==='A'?`<div style="font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:0.4rem">✓ WINNER</div>`:`<div style="height:1.1rem"></div>`}
+        <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Net Profit</div>
+        <div style="font-family:var(--mono);font-size:1.6rem;font-weight:300;color:${pcA}">${fmt(a.net)}</div>
+        <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">${a.sqft?'$'+a.priceSqft+'/sqft':''}</div>
+      </div>
+      <div style="background:${winner==='B'?"#f0fdf4":"var(--surface)"};border:${winner==='B'?"2px solid #16a34a":"1px solid var(--border)"};border-radius:12px;padding:1.2rem;text-align:center">
+        ${winner==='B'?`<div style="font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:0.4rem">✓ WINNER</div>`:`<div style="height:1.1rem"></div>`}
+        <div style="font-size:0.62rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Net Profit</div>
+        <div style="font-family:var(--mono);font-size:1.6rem;font-weight:300;color:${pcB}">${fmt(b.net)}</div>
+        <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.3rem">${b.sqft?'$'+b.priceSqft+'/sqft':''}</div>
+      </div>
+    </div>
+
+    ${winner!=='TIE'?`<div style="text-align:center;font-size:0.72rem;color:var(--green);font-weight:600;margin-bottom:1.2rem">${a.modelName} ${winner==='A'?'wins by '+fmt(a.net-b.net):''} ${winner==='B'?b.modelName+' wins by '+fmt(b.net-a.net):''}</div>`:""}
+
+    <!-- Detailed Comparison -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem">
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;margin-bottom:0.5rem">
+        <div style="font-size:0.62rem;font-weight:600;color:var(--accent);text-align:right;padding-right:0.6rem">${a.modelName}</div>
+        <div style="width:5.5rem"></div>
+        <div style="font-size:0.62rem;font-weight:600;color:var(--accent);padding-left:0.6rem">${b.modelName}</div>
+      </div>
+      ${cmpRow("Home Cost",a.hc,b.hc,a.hc<b.hc,b.hc<a.hc)}
+      ${cmpRow("Sqft",a.sqft?a.sqft.toLocaleString()+" sf":"—",b.sqft?b.sqft.toLocaleString()+" sf":"—",a.sqft>b.sqft,b.sqft>a.sqft)}
+      ${cmpRow("$/sqft Sale",a.sqft?"$"+a.priceSqft:"—",b.sqft?"$"+b.priceSqft:"—")}
+      ${cmpRow("$/sqft Cost",a.sqft?"$"+a.costSqft:"—",b.sqft?"$"+b.costSqft:"—",a.costSqft<b.costSqft&&a.sqft>0,b.costSqft<a.costSqft&&b.sqft>0)}
+      ${cmpRow("Total Hard",a.hard,b.hard,a.hard<b.hard,b.hard<a.hard)}
+      ${cmpRow("Setup",a.st,b.st)}
+      ${cmpRow("Financing",a.tfin,b.tfin)}
+      ${cmpRow("Holding",a.ht,b.ht)}
+      ${cmpRow("Selling",a.tsell,b.tsell)}
+      ${cmpRow("Total All-In",a.total,b.total,a.total<b.total,b.total<a.total)}
+      <div style="height:1px;background:var(--text);margin:0.5rem 0"></div>
+      ${cmpRow("Net Profit",fmt(a.net),fmt(b.net),a.net>b.net,b.net>a.net)}
+      ${cmpRow("Margin",fmtP(a.margin),fmtP(b.margin),a.margin>b.margin,b.margin>a.margin)}
+      ${cmpRow("ROI",fmtP(a.roi),fmtP(b.roi),a.roi>b.roi,b.roi>a.roi)}
+      ${cmpRow("CoC",a.coc!==null?fmtP(a.coc):"—",b.coc!==null?fmtP(b.coc):"—",a.coc>b.coc,b.coc>a.coc)}
+      ${cmpRow("Cash to Close",a.cashToClose,b.cashToClose,a.cashToClose<b.cashToClose,b.cashToClose<a.cashToClose)}
+      ${cmpRow("Break-Even",a.breakEven,b.breakEven,a.breakEven<b.breakEven,b.breakEven<a.breakEven)}
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   BUYER MODE — Standalone Mortgage Calculator
+   ═══════════════════════════════════════════ */
+function buildBuyerMode(){
+  const c=recalc();
+  const bDown=S.salePrice*S.buyerDownPct/100;
+  const bLoan=S.salePrice-bDown;
+  const bR=S.buyerRate/100/12;
+  const bN=S.buyerTerm*12;
+  const bPmt=bR>0?bLoan*(bR*Math.pow(1+bR,bN))/(Math.pow(1+bR,bN)-1):bLoan/bN;
+  const bTotal=bPmt*bN;
+  const bInt=bTotal-bLoan;
+  const bTaxMo=Math.round(S.salePrice*(S.taxRate/100)/12);
+  const bInsMo=Math.round(S.buyerInsAnnual/12);
+  const bNeedsPmi=S.buyerDownPct<20;
+  const bPmiMo=bNeedsPmi?Math.round(bLoan*(S.buyerPmiRate/100)/12):0;
+  const bTotalMo=Math.round(bPmt)+bTaxMo+bInsMo+bPmiMo;
+  const piPct=bTotalMo>0?Math.round(bPmt/bTotalMo*100):0;
+  const taxPct=bTotalMo>0?Math.round(bTaxMo/bTotalMo*100):0;
+  const insPct=bTotalMo>0?Math.round(bInsMo/bTotalMo*100):0;
+  const pmiPct=bTotalMo>0?Math.round(bPmiMo/bTotalMo*100):0;
+
+  return`
+  <div style="max-width:480px;margin:0 auto;padding-top:0.5rem">
+
+    <!-- Hero: Total Monthly Payment -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.6rem 1.4rem 1.2rem;margin-bottom:1rem">
+      <div style="text-align:center;margin-bottom:1.2rem">
+        <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Estimated Monthly Payment</div>
+        <div style="font-size:clamp(2.4rem,10vw,3.2rem);font-weight:300;letter-spacing:-0.04em;color:var(--accent);font-family:'Inter',sans-serif;line-height:1">${fmt(bTotalMo)}</div>
+        <div style="font-size:0.65rem;color:var(--text-3);margin-top:0.4rem">PITI${bNeedsPmi?" + PMI":""} · ${S.buyerTerm}-year fixed @ ${S.buyerRate}%</div>
+      </div>
+      <!-- Breakdown segments -->
+      <div style="display:flex;height:6px;border-radius:3px;overflow:hidden;margin-bottom:1rem;gap:2px">
+        <div style="width:${piPct}%;background:var(--accent);border-radius:3px"></div>
+        <div style="width:${taxPct}%;background:var(--amber);border-radius:3px"></div>
+        <div style="width:${insPct}%;background:var(--green);border-radius:3px"></div>
+        ${bNeedsPmi?`<div style="width:${pmiPct}%;background:var(--red);border-radius:3px"></div>`:""}
+      </div>
+      <div style="display:grid;grid-template-columns:${bNeedsPmi?"1fr 1fr 1fr 1fr":"1fr 1fr 1fr"};gap:0.5rem">
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--accent)">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3)">P&I</div>
+          <div style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text);margin-top:0.15rem">${fmt(Math.round(bPmt))}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--amber)">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3)">Tax</div>
+          <div style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text);margin-top:0.15rem">${fmt(bTaxMo)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--green)">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3)">Insurance</div>
+          <div style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text);margin-top:0.15rem">${fmt(bInsMo)}</div>
+        </div>
+        ${bNeedsPmi?`<div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px;border-left:3px solid var(--red)">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3)">PMI</div>
+          <div style="font-family:var(--mono);font-size:0.78rem;font-weight:500;color:var(--text);margin-top:0.15rem">${fmt(bPmiMo)}</div>
+        </div>`:""}
+      </div>
+    </div>
+
+    <!-- Home Price -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.9rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Home Price</span>
+        ${S.dealName?`<span style="font-size:0.62rem;color:var(--text-3)">${esc(S.dealName)}</span>`:""}
+      </div>
+      <div style="display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface)">
+        <button onclick="S.salePrice=Math.max(50000,S.salePrice-5000);S.quickArvOverride=true;saveState();render()" style="width:52px;height:52px;font-size:1.3rem;font-weight:300;background:transparent;border:none;color:var(--text-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent">−</button>
+        <div style="flex:1;text-align:center;font-family:var(--mono);font-size:1.1rem;font-weight:500;color:var(--text);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:0.9rem 0.5rem">${fmt(S.salePrice)}</div>
+        <button onclick="S.salePrice=S.salePrice+5000;S.quickArvOverride=true;saveState();render()" style="width:52px;height:52px;font-size:1.3rem;font-weight:300;background:transparent;border:none;color:var(--text-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent">+</button>
+      </div>
+      ${c.sqft?`<div style="font-size:0.62rem;color:var(--text-3);margin-top:0.5rem;text-align:center;font-family:var(--mono)">${c.modelName} · ${c.sqft.toLocaleString()} sqft · $${c.priceSqft}/sqft</div>`:""}
+    </div>
+
+    <!-- Down Payment -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Down Payment</span>
+        <span style="font-family:var(--mono);font-size:1rem;font-weight:500;color:var(--text)">${fmt(Math.round(bDown))}</span>
+      </div>
+      <div class="tg" style="grid-template-columns:repeat(5,1fr);margin-bottom:0.5rem">
+        ${[0,3.5,5,10,20].map(p=>`<button class="tg-btn${S.buyerDownPct===p?" active":""}" style="min-height:44px;font-size:0.75rem" onclick="S.buyerDownPct=${p};saveState();render()">${p}%</button>`).join("")}
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:0 0.1rem;margin-top:0.4rem">
+        <span style="font-size:0.68rem;color:var(--text-3)">Down: ${fmt(Math.round(bDown))}</span>
+        <span style="font-size:0.68rem;color:var(--text-3)">Loan: ${fmt(Math.round(bLoan))}</span>
+      </div>
+    </div>
+
+    <!-- Rate, Insurance, Term -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.9rem">
+        <div><div class="field-lbl">Interest Rate</div>
+          <div style="position:relative"><input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1.5rem 0.65rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="decimal" value="${S.buyerRate}" onblur="S.buyerRate=parseFloat(this.value)||7;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /><span style="position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none">%</span></div>
+        </div>
+        <div><div class="field-lbl">Annual Insurance</div>
+          <div style="position:relative"><span style="position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--text-3);pointer-events:none;font-family:var(--mono)">$</span><input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.75rem 0.65rem 1.5rem;color:var(--text);font-family:var(--mono);font-size:0.88rem;outline:none;-webkit-appearance:none;" type="tel" inputmode="numeric" value="${S.buyerInsAnnual}" onblur="S.buyerInsAnnual=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" /></div>
+        </div>
+      </div>
+      <div class="tg" style="grid-template-columns:1fr 1fr">
+        ${[15,30].map(t=>`<button class="tg-btn${S.buyerTerm===t?" active":""}" style="min-height:44px" onclick="S.buyerTerm=${t};saveState();render()">${t}-Year Fixed</button>`).join("")}
+      </div>
+    </div>
+
+    <!-- PMI -->
+    ${bNeedsPmi?`
+    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:1rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <div style="font-size:0.72rem;font-weight:600;color:#b45309">Mortgage Insurance (PMI)</div>
+        <span style="font-family:var(--mono);font-size:0.95rem;font-weight:600;color:#b45309">${fmt(bPmiMo)}/mo</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.6rem">
+        <span style="font-size:0.72rem;color:var(--text-2);white-space:nowrap">PMI Rate</span>
+        <div style="position:relative;width:80px;flex-shrink:0">
+          <input style="width:100%;background:#fff;border:1px solid #fde68a;border-radius:6px;padding:0.35rem 1.4rem 0.35rem 0.5rem;color:var(--text);font-family:var(--mono);font-size:0.8rem;outline:none;text-align:right" type="tel" inputmode="decimal" value="${S.buyerPmiRate}" onblur="S.buyerPmiRate=parseFloat(this.value)||0.75;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" />
+          <span style="position:absolute;right:0.4rem;top:50%;transform:translateY(-50%);font-size:0.68rem;color:var(--text-3);pointer-events:none">%</span>
+        </div>
+        <span style="font-size:0.62rem;color:#b45309">Required — below 20% down</span>
+      </div>
+      <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.5rem">${fmt(Math.round(bLoan*(S.buyerPmiRate/100)))}/yr · typically drops off at 20% equity</div>
+    </div>`
+    :`<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:0.85rem 1.4rem;margin-bottom:0.85rem;font-size:0.78rem;color:#15803d;font-weight:500">✓ No PMI required — 20%+ down payment</div>`}
+
+    <!-- Monthly Breakdown -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.7rem">Monthly Breakdown</div>
+      <div class="inline-row"><span class="inline-lbl">Principal & Interest</span><span class="inline-val">${fmt(Math.round(bPmt))}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Property Taxes (${S.taxRate}%)</span><span class="inline-val">${fmt(bTaxMo)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Homeowner's Insurance</span><span class="inline-val">${fmt(bInsMo)}</span></div>
+      ${bNeedsPmi?`<div class="inline-row"><span class="inline-lbl">Mortgage Insurance (PMI)</span><span class="inline-val" style="color:#b45309">${fmt(bPmiMo)}</span></div>`:""}
+      <div style="display:flex;justify-content:space-between;padding-top:0.6rem;margin-top:0.3rem;border-top:2px solid var(--text)">
+        <span style="font-size:0.88rem;font-weight:700;color:var(--text)">Total Monthly</span>
+        <span style="font-family:var(--mono);font-size:0.88rem;font-weight:700;color:var(--accent)">${fmt(bTotalMo)}</span>
+      </div>
+    </div>
+
+    <!-- Loan Summary -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.7rem">Loan Summary</div>
+      <div class="inline-row"><span class="inline-lbl">Home Price</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(S.salePrice)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Down Payment (${S.buyerDownPct}%)</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(Math.round(bDown))}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Loan Amount</span><span class="inline-val">${fmt(Math.round(bLoan))}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Interest Rate</span><span class="inline-val">${S.buyerRate}% fixed</span></div>
+      <div class="inline-row"><span class="inline-lbl">Loan Term</span><span class="inline-val">${S.buyerTerm} years (${bN} payments)</span></div>
+      <div style="height:1px;background:var(--border);margin:0.5rem 0"></div>
+      <div class="inline-row"><span class="inline-lbl">Total Interest Paid</span><span class="inline-val" style="color:#b45309">${fmt(Math.round(bInt))}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total of All Payments</span><span class="inline-val">${fmt(Math.round(bTotal))}</span></div>
+      ${bNeedsPmi?`<div class="inline-row"><span class="inline-lbl">Est. PMI (annual)</span><span class="inline-val" style="color:var(--text-3)">${fmt(bPmiMo*12)}/yr</span></div>`:""}
+      <div style="font-size:0.6rem;color:var(--text-3);margin-top:0.5rem">${bNeedsPmi?"PMI typically drops off once you reach 20% equity":""}
+      </div>
+    </div>
+
+    <!-- Compare terms -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.7rem">15yr vs 30yr Comparison</div>
+      ${[15,30].map(t=>{
+        const n2=t*12;const r2=S.buyerRate/100/12;
+        const pmt2=r2>0?bLoan*(r2*Math.pow(1+r2,n2))/(Math.pow(1+r2,n2)-1):bLoan/n2;
+        const tot2=pmt2*n2;const int2=tot2-bLoan;
+        const taxIns=bTaxMo+bInsMo+bPmiMo;
+        const isActive=t===S.buyerTerm;
+        return`<div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0.8rem;margin-bottom:0.4rem;border-radius:8px;border:1.5px solid ${isActive?"var(--accent)":"var(--border)"};background:${isActive?"var(--accent-light)":"transparent"}">
+          <div>
+            <div style="font-size:0.78rem;font-weight:${isActive?"600":"400"};color:${isActive?"var(--accent)":"var(--text-2)"}">${t}-Year Fixed</div>
+            <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.15rem">${fmt(Math.round(int2))} total interest</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:var(--mono);font-size:1rem;font-weight:600;color:${isActive?"var(--accent)":"var(--text)"}">${fmt(Math.round(pmt2+taxIns))}<span style="font-size:0.65rem;color:var(--text-3);font-weight:400">/mo</span></div>
+            <div style="font-size:0.6rem;color:var(--text-3);font-family:var(--mono)">${fmt(Math.round(pmt2))} P&I</div>
+          </div>
+        </div>`;
+      }).join("")}
+      ${(()=>{
+        const r15=S.buyerRate/100/12;const n15=180;const r30=S.buyerRate/100/12;const n30=360;
+        const p15=r15>0?bLoan*(r15*Math.pow(1+r15,n15))/(Math.pow(1+r15,n15)-1):bLoan/n15;
+        const p30=r30>0?bLoan*(r30*Math.pow(1+r30,n30))/(Math.pow(1+r30,n30)-1):bLoan/n30;
+        const saved=(p30*n30)-(p15*n15);
+        return saved>0?`<div style="font-size:0.68rem;color:var(--green);margin-top:0.4rem;text-align:center;font-weight:500">15yr saves ${fmt(Math.round(saved))} in total interest vs 30yr</div>`:"";
+      })()}
+    </div>
+
+    <div style="text-align:center;font-size:0.6rem;color:var(--text-3);margin-bottom:2.5rem;padding:0 1rem">Estimates only — actual payment may vary. Does not include HOA. Tax rate based on ${S.taxRate}% of home price. PMI rates vary by lender and credit score.</div>
+  </div>`;
+}
+
+
+/* ═══════════════════════════════════════════
+   SUBDIVIDE MODE — Land Subdivision Calculator
+   ═══════════════════════════════════════════ */
+function buildSubdivideMode(){
+  const d=S.sub;
+  const numLots=Math.max(1,Math.floor(d.totalFrontage/d.ftPerLot));
+  const numMeters=d.numMetersOverride>0?d.numMetersOverride:numLots;
+  const waterCost=numMeters*d.waterMeterCost;
+  const electricTotal=d.electricPerLot*numLots;
+  const totalInfra=waterCost+d.miscWaterCost+electricTotal+d.surveyCost+d.roadCost+d.attorneyFees+d.filingFees+d.custom1+d.custom2;
+  const autoBuyClosing=Math.round(d.landPrice*0.005);
+  const buyClosing=d.buyClosingOverride>0?d.buyClosingOverride:autoBuyClosing;
+  const buyClosingIsAuto=d.buyClosingOverride===0;
+  const hardCost=d.landPrice+totalInfra+buyClosing;
+
+  let loanAmt=0,origFee=0,interest=0,totalFin=0;
+  if(d.financed){
+    loanAmt=Math.round(hardCost*(d.ltcPct/100));
+    origFee=Math.round(loanAmt*(d.originationPts/100));
+    interest=Math.round((loanAmt*(d.interestRate/100)/12)*d.loanMonths);
+    totalFin=origFee+interest;
+  }
+
+  const holdPropTax=Math.round(hardCost*(d.holdTaxRate/100)*(d.loanMonths/12));
+  const totalHold=holdPropTax+d.holdInsurance+d.holdMaint;
+
+  // Rollback taxes (ag exemption removal)
+  let rollbackBase=0,rollbackInt=0,rollbackTotal=0;
+  if(d.agExemption&&d.marketValue>d.agValue){
+    const annualDiff=(d.marketValue-d.agValue)*(d.holdTaxRate/100);
+    rollbackBase=Math.round(annualDiff*d.rollbackYears);
+    const sumYears=d.rollbackYears*(d.rollbackYears+1)/2;
+    rollbackInt=Math.round(annualDiff*(d.rollbackInterest/100)*sumYears);
+    rollbackTotal=rollbackBase+rollbackInt;
+  }
+
+  const totalBasis=hardCost+totalFin+totalHold+rollbackTotal;
+  const basisPerLot=Math.round(totalBasis/numLots);
+
+  const t_rev=numLots*d.lotArvTrad;
+  const t_comm=Math.round(t_rev*d.commPct);
+  const t_title=Math.round(t_rev*0.01);
+  const t_sell=t_comm+t_title;
+  const t_net=t_rev-totalBasis-t_sell;
+  const t_netLot=Math.round(t_net/numLots);
+  const t_roi=totalBasis>0?t_net/totalBasis:0;
+
+  const sf_downLot=Math.round(d.lotArvSF*(d.sfDownPct/100));
+  const sf_loanLot=d.lotArvSF-sf_downLot;
+  const sf_r=d.sfRate/100/12;
+  const sf_n=d.sfTermYrs*12;
+  const sf_pmtLot=sf_r>0?sf_loanLot*(sf_r*Math.pow(1+sf_r,sf_n))/(Math.pow(1+sf_r,sf_n)-1):sf_loanLot/sf_n;
+  const sf_totalPerLot=sf_downLot+sf_pmtLot*sf_n;
+  const sf_totalRev=sf_totalPerLot*numLots;
+  const sf_totalDowns=sf_downLot*numLots;
+  const sf_monthlyAll=Math.round(sf_pmtLot*numLots);
+  const sf_title=Math.round(numLots*d.lotArvSF*0.005);
+  const sf_net=sf_totalRev-totalBasis-sf_title;
+  const sf_netLot=Math.round(sf_net/numLots);
+  const sf_interestEarned=Math.round((sf_totalPerLot-d.lotArvSF)*numLots);
+
+  const mh_homeTotal=numLots*d.mhHomeCost;
+  const mh_setupTotal=numLots*d.mhSetupCost;
+  const mh_totalCost=totalBasis+mh_homeTotal+mh_setupTotal;
+  const mh_rev=numLots*d.lotArvMH;
+  const mh_comm=Math.round(mh_rev*d.commPct);
+  const mh_title=Math.round(mh_rev*0.01);
+  const mh_sell=mh_comm+mh_title;
+  const mh_net=mh_rev-mh_totalCost-mh_sell;
+  const mh_netLot=Math.round(mh_net/numLots);
+  const mh_roi=mh_totalCost>0?mh_net/mh_totalCost:0;
+
+  // ── FINANCIAL METRICS ──
+  const cashReq=d.financed?hardCost-loanAmt+origFee+buyClosing:hardCost;
+  const mh_cashReq=cashReq+mh_homeTotal+mh_setupTotal;
+  // Traditional
+  const t_margin=t_rev>0?t_net/t_rev:0;
+  const t_coc=cashReq>0?t_net/cashReq:0;
+  const t_breakEven=numLots>0?Math.ceil((totalBasis)/(numLots*(1-d.commPct-0.01))):0;
+  // Seller Finance
+  const sf_margin=sf_totalRev>0?sf_net/sf_totalRev:0;
+  const sf_coc=cashReq>0?sf_net/cashReq:0;
+  const sf_annReturn=cashReq>0&&d.sfTermYrs>0?sf_net/(cashReq*d.sfTermYrs):0;
+  const sf_yield=cashReq>0?sf_monthlyAll*12/cashReq:0;
+  // MH
+  const mh_margin=mh_rev>0?mh_net/mh_rev:0;
+  const mh_coc=mh_cashReq>0?mh_net/mh_cashReq:0;
+
+  const exits=[{name:"Traditional",net:t_net},{name:"Seller Finance",net:Math.round(sf_net)},{name:"Mobile Home",net:mh_net}];
+  const best=exits.reduce((a,b)=>a.net>b.net?a:b);
+
+  const sInp=(label,key,prefix,suffix)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:0.78rem;color:var(--text-2)">${label}</span>
+      <div style="position:relative;width:100px;flex-shrink:0">
+        ${prefix?`<span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">${prefix}</span>`:""}
+        <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.38rem ${suffix?"1.4rem":"0.4rem"} 0.38rem ${prefix?"1.2rem":"0.5rem"};font-family:var(--mono);font-size:0.8rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+          type="tel" inputmode="${suffix?"decimal":"numeric"}" value="${eval('S.sub.'+key)}"
+          onblur="S.sub.${key}=${suffix?"parseFloat":"parseInt"}(this.value${suffix?"":".replace(/[^0-9]/g,'')"})||0;saveState();render()"
+          onkeydown="if(event.key==='Enter')this.blur()" />
+        ${suffix?`<span style="position:absolute;right:0.4rem;top:50%;transform:translateY(-50%);font-size:0.68rem;color:var(--text-3);pointer-events:none">${suffix}</span>`:""}
+      </div>
+    </div>`;
+
+  const sInpCustom=(lblKey,valKey)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+      <input style="flex:1;background:transparent;border:1px solid transparent;border-radius:4px;padding:0.25rem 0.4rem;color:var(--text-2);font-size:0.78rem;outline:none;font-family:'Inter',sans-serif" value="${esc(eval('S.sub.'+lblKey))}" onblur="S.sub.${lblKey}=this.value;saveState();render()" />
+      <div style="position:relative;width:100px;flex-shrink:0">
+        <span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+        <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.38rem 0.4rem 0.38rem 1.2rem;font-family:var(--mono);font-size:0.8rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+          type="tel" inputmode="numeric" value="${eval('S.sub.'+valKey)}"
+          onblur="S.sub.${valKey}=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+          onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+    </div>`;
+
+  const exitColor=(net)=>net>=MINP*numLots?"#16a34a":net>=0?"#b45309":"#dc2626";
+  const subLine=(lbl,val)=>`<div style="display:flex;justify-content:space-between;padding:0.2rem 0 0.35rem;border-bottom:1px solid var(--border)"><span style="font-size:0.68rem;color:var(--text-3);padding-left:0.5rem">${lbl}</span><span style="font-family:var(--mono);font-size:0.68rem;color:var(--text-3)">${fmt(val)}</span></div>`;
+
+  return`
+  <div style="max-width:640px;margin:0 auto;padding-top:0.5rem">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:0.85rem;font-weight:600;color:var(--text)">Land Subdivision Calculator</div>
+      <div style="font-size:0.68rem;color:var(--text-3);margin-top:0.3rem">Buy land · subdivide into lots · compare exit strategies</div>
+    </div>
+
+    <!-- DEAL INFO -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Deal Info</div>
+      <div style="margin-bottom:0.6rem">
+        <div style="font-size:0.7rem;font-weight:500;color:var(--text-2);margin-bottom:0.3rem">Deal Name</div>
+        <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.85rem;outline:none;-webkit-appearance:none"
+          type="text" value="${esc(S.dealName)}" placeholder="e.g. Johnson Rd 30 acres"
+          onblur="S.dealName=this.value;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+      <div style="margin-bottom:0.6rem">
+        <div style="font-size:0.7rem;font-weight:500;color:var(--text-2);margin-bottom:0.3rem">Property Address</div>
+        <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.75rem;color:var(--text);font-family:var(--mono);font-size:0.85rem;outline:none;-webkit-appearance:none"
+          type="text" value="${esc(S.dealAddress)}" placeholder="e.g. FM 917, Alvarado TX"
+          onblur="S.dealAddress=this.value;saveState();render()" onkeydown="if(event.key==='Enter')this.blur()" />
+      </div>
+      <div>
+        <div style="font-size:0.7rem;font-weight:500;color:var(--text-2);margin-bottom:0.3rem">Notes</div>
+        <textarea style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.6rem 0.75rem;color:var(--text);font-family:'Inter',sans-serif;font-size:0.82rem;outline:none;resize:vertical;min-height:50px;-webkit-appearance:none;line-height:1.5"
+          placeholder="Zoning, restrictions, water district…"
+          onblur="S.notes=this.value;saveState();render()">${esc(S.notes)}</textarea>
+      </div>
+    </div>
+
+    <!-- LAND ACQUISITION -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Land Acquisition</div>
+      ${sInp("Land Purchase Price","landPrice","$")}
+      ${sInp("Total Road Frontage","totalFrontage","","ft")}
+      ${sInp("Frontage per Lot","ftPerLot","","ft")}
+      <div style="display:flex;justify-content:space-between;padding:0.65rem 0 0.2rem;margin-top:0.3rem;border-top:1px solid var(--border-strong)">
+        <span style="font-size:0.82rem;font-weight:600;color:var(--text)">Number of Lots</span>
+        <span style="font-family:var(--mono);font-size:1.1rem;font-weight:600;color:var(--accent)">${numLots}</span>
+      </div>
+      <div style="font-size:0.62rem;color:var(--text-3)">${d.totalFrontage} ft ÷ ${d.ftPerLot} ft = ${numLots} lots · ${fmt(Math.round(d.landPrice/numLots))}/lot land cost</div>
+    </div>
+
+    <!-- INFRASTRUCTURE -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Infrastructure & Development</div>
+
+      <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);margin:0.6rem 0 0.3rem">Water</div>
+      ${sInp("Water Meter (each)","waterMeterCost","$")}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:0.78rem;color:var(--text-2)">Number of Meters</span>
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          ${d.numMetersOverride===0?`<span style="font-size:0.55rem;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);border-radius:3px;padding:0.08rem 0.35rem;font-family:var(--mono);font-weight:600">AUTO</span>`:""}
+          <div style="position:relative;width:60px;flex-shrink:0">
+            <input style="width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:0.38rem 0.4rem;font-family:var(--mono);font-size:0.8rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+              type="tel" inputmode="numeric" value="${numMeters}" placeholder="${numLots}"
+              onblur="S.sub.numMetersOverride=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+              onkeydown="if(event.key==='Enter')this.blur()" />
+          </div>
+        </div>
+      </div>
+      ${subLine("Total Meters",waterCost)}
+      ${sInp("Misc Water Costs","miscWaterCost","$")}
+      ${subLine("Total Water",waterCost+d.miscWaterCost)}
+
+      <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);margin:0.8rem 0 0.3rem">Electrical</div>
+      ${sInp("Electrical (per lot)","electricPerLot","$")}
+      ${subLine("Total electrical ("+numLots+" lots)",electricTotal)}
+
+      <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);margin:0.8rem 0 0.3rem">Other</div>
+      ${sInp("Survey / Plat","surveyCost","$")}
+      ${sInp("Road / Access","roadCost","$")}
+      ${sInp("Attorney Fees","attorneyFees","$")}
+      ${sInp("Filing Fees","filingFees","$")}
+      ${sInpCustom("c1lbl","custom1")}
+      ${sInpCustom("c2lbl","custom2")}
+
+      <div style="display:flex;justify-content:space-between;padding:0.65rem 0 0.2rem;margin-top:0.3rem;border-top:1px solid var(--border-strong)">
+        <span style="font-size:0.82rem;font-weight:600;color:var(--text)">Total Infrastructure</span>
+        <span style="font-family:var(--mono);font-size:0.88rem;font-weight:600;color:var(--text)">${fmt(totalInfra)}</span>
+      </div>
+      <div style="font-size:0.62rem;color:var(--text-3)">${fmt(Math.round(totalInfra/numLots))}/lot infrastructure cost</div>
+    </div>
+
+    <!-- BUY-SIDE CLOSING -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Buy-Side Closing</span>
+          ${buyClosingIsAuto?`<span style="font-size:0.55rem;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);border-radius:3px;padding:0.08rem 0.35rem;font-family:var(--mono);font-weight:600">AUTO</span>`
+          :`<button onclick="S.sub.buyClosingOverride=0;saveState();render()" style="font-size:0.55rem;color:var(--text-3);background:none;border:1px solid var(--border);border-radius:3px;padding:0.08rem 0.35rem;font-family:'Inter',sans-serif">Reset</button>`}
+        </div>
+        <div style="position:relative;width:100px;flex-shrink:0">
+          <span style="position:absolute;left:0.45rem;top:50%;transform:translateY(-50%);font-size:0.72rem;color:var(--text-3);font-family:var(--mono);pointer-events:none">$</span>
+          <input style="width:100%;background:${buyClosingIsAuto?"var(--accent-light)":"var(--surface-2)"};border:1px solid ${buyClosingIsAuto?"var(--accent-border)":"var(--border)"};border-radius:6px;padding:0.38rem 0.4rem 0.38rem 1.2rem;font-family:var(--mono);font-size:0.8rem;color:var(--text);outline:none;-webkit-appearance:none;text-align:right"
+            type="tel" inputmode="numeric" value="${buyClosing}"
+            onblur="S.sub.buyClosingOverride=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+            onkeydown="if(event.key==='Enter')this.blur()" />
+        </div>
+      </div>
+      ${buyClosingIsAuto?`<div style="font-size:0.6rem;color:var(--text-3);margin-top:0.4rem">0.5% of ${fmt(d.landPrice)} land price · edit to override</div>`:""}
+    </div>
+
+    <!-- FINANCING -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Financing</span>
+        <div style="display:flex;gap:0;background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:0.15rem">
+          <button onclick="S.sub.financed=true;saveState();render()" style="font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.financed?"600":"400"};min-height:32px;padding:0 0.8rem;border-radius:5px;border:none;background:${d.financed?"var(--surface)":"transparent"};color:${d.financed?"var(--text)":"var(--text-3)"};box-shadow:${d.financed?"0 1px 3px rgba(0,0,0,0.1)":"none"}">Financed</button>
+          <button onclick="S.sub.financed=false;saveState();render()" style="font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${!d.financed?"600":"400"};min-height:32px;padding:0 0.8rem;border-radius:5px;border:none;background:${!d.financed?"#f0fdf4":"transparent"};color:${!d.financed?"#16a34a":"var(--text-3)"};box-shadow:${!d.financed?"0 1px 3px rgba(0,0,0,0.1)":"none"}">Cash</button>
+        </div>
+      </div>
+      ${d.financed?`
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 0.8rem;margin-bottom:0.7rem">
+        ${sInp("Interest Rate","interestRate","","%")}
+        ${sInp("Orig. Points","originationPts","","pts")}
+        ${sInp("LTC %","ltcPct","","%")}
+        ${sInp("Term","loanMonths","","mo")}
+      </div>
+      <div class="inline-row"><span class="inline-lbl">Hard Cost</span><span class="inline-val">${fmt(hardCost)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Loan Amount (${d.ltcPct}%)</span><span class="inline-val">${fmt(loanAmt)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Origination</span><span class="inline-val">${fmt(origFee)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Interest (${d.loanMonths}mo)</span><span class="inline-val">${fmt(interest)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding-top:0.5rem;margin-top:0.2rem;border-top:1px solid var(--border-strong)">
+        <span style="font-size:0.8rem;font-weight:600;color:var(--text)">Total Financing</span>
+        <span style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text)">${fmt(totalFin)}</span>
+      </div>`
+      :`<div style="font-size:0.78rem;color:#15803d;font-weight:500">✓ Cash deal — no financing costs</div>`}
+    </div>
+
+    <!-- HOLDING -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Holding Costs (${d.loanMonths} mo)</div>
+      ${subLine("Property Tax ("+d.holdTaxRate+"% · "+d.loanMonths+"mo)",holdPropTax)}
+      ${sInp("Insurance (annual)","holdInsurance","$")}
+      ${sInp("Tax Rate","holdTaxRate","","%")}
+      ${sInp("Maintenance","holdMaint","$")}
+      <div style="display:flex;justify-content:space-between;padding:0.5rem 0;margin-top:0.2rem;border-top:1px solid var(--border-strong)">
+        <span style="font-size:0.8rem;font-weight:600;color:var(--text)">Total Holding</span>
+        <span style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text)">${fmt(totalHold)}</span>
+      </div>
+    </div>
+
+    <!-- AG EXEMPTION / ROLLBACK TAXES -->
+    <div style="background:var(--surface);border:1px solid ${d.agExemption?"#fde68a":"var(--border)"};border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${d.agExemption?"0.8rem":"0"}">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Ag Exemption in Place?</span>
+        <div style="display:flex;gap:0;background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:0.15rem">
+          <button onclick="S.sub.agExemption=true;saveState();render()" style="font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.agExemption?"600":"400"};min-height:32px;padding:0 0.8rem;border-radius:5px;border:none;background:${d.agExemption?"#fffbeb":"transparent"};color:${d.agExemption?"#b45309":"var(--text-3)"};box-shadow:${d.agExemption?"0 1px 3px rgba(0,0,0,0.1)":"none"}">Yes</button>
+          <button onclick="S.sub.agExemption=false;saveState();render()" style="font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${!d.agExemption?"600":"400"};min-height:32px;padding:0 0.8rem;border-radius:5px;border:none;background:${!d.agExemption?"var(--surface)":"transparent"};color:${!d.agExemption?"var(--text)":"var(--text-3)"};box-shadow:${!d.agExemption?"0 1px 3px rgba(0,0,0,0.1)":"none"}">No</button>
+        </div>
+      </div>
+      ${d.agExemption?`
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:0.75rem 0.9rem;margin-bottom:0.7rem">
+        <div style="font-size:0.68rem;font-weight:600;color:#b45309;margin-bottom:0.3rem">⚠ Rollback Taxes Apply</div>
+        <div style="font-size:0.62rem;color:var(--text-3)">Changing land use triggers rollback of the ag exemption. County will assess the difference between market value and ag value for the prior ${d.rollbackYears} years plus ${d.rollbackInterest}% annual interest.</div>
+      </div>
+      ${sInp("Current Ag Value","agValue","$")}
+      ${sInp("Market Value (non-ag)","marketValue","$")}
+      <div style="display:flex;justify-content:space-between;padding:0.25rem 0 0.4rem;border-bottom:1px solid var(--border)">
+        <span style="font-size:0.72rem;color:var(--text-3);padding-left:0.5rem">Annual Difference</span>
+        <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3)">${d.marketValue>d.agValue?fmt(Math.round((d.marketValue-d.agValue)*(d.holdTaxRate/100)))+"/yr":"$0"}</span>
+      </div>
+      ${sInp("Rollback Period","rollbackYears","","yr")}
+      ${sInp("Interest Rate","rollbackInterest","","%")}
+      <div style="height:1px;background:var(--border);margin:0.4rem 0"></div>
+      <div class="inline-row"><span class="inline-lbl">Base Rollback Tax</span><span class="inline-val">${fmt(rollbackBase)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Accrued Interest</span><span class="inline-val" style="color:#b45309">${fmt(rollbackInt)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0.55rem 0 0.1rem;margin-top:0.2rem;border-top:2px solid #b45309">
+        <span style="font-size:0.82rem;font-weight:700;color:#b45309">Total Rollback Taxes</span>
+        <span style="font-family:var(--mono);font-size:0.88rem;font-weight:700;color:#b45309">${fmt(rollbackTotal)}</span>
+      </div>
+      <div style="font-size:0.6rem;color:var(--text-3);margin-top:0.4rem">${fmt(Math.round(rollbackTotal/numLots))}/lot · added to total basis</div>
+      `:""}
+    </div>
+
+    <!-- TOTAL BASIS -->
+    <div style="background:var(--accent-light);border:1px solid var(--accent-border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Total Basis (All-In Cost)</span>
+        <span style="font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--accent)">${fmt(totalBasis)}</span>
+      </div>
+      <div style="font-size:0.68rem;color:var(--text-2);margin-bottom:0.4rem">${numLots} lots · ${fmt(basisPerLot)}/lot</div>
+      <div class="inline-row"><span class="inline-lbl">Land</span><span class="inline-val">${fmt(d.landPrice)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Infrastructure</span><span class="inline-val">${fmt(totalInfra)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Buy Closing</span><span class="inline-val">${fmt(buyClosing)}</span></div>
+      ${d.financed?`<div class="inline-row"><span class="inline-lbl">Financing</span><span class="inline-val">${fmt(totalFin)}</span></div>`:""}
+      <div class="inline-row"><span class="inline-lbl">Holding</span><span class="inline-val">${fmt(totalHold)}</span></div>
+      ${rollbackTotal?`<div class="inline-row"><span class="inline-lbl" style="color:#b45309">Rollback Taxes</span><span class="inline-val" style="color:#b45309">${fmt(rollbackTotal)}</span></div>`:""}
+    </div>
+
+    <!-- COMMISSION -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3)">Commission (Trad. & MH)</span>
+        <div class="tg" style="grid-template-columns:repeat(3,1fr);width:180px">
+          ${[0.06,0.03,0].map(p=>`<button class="tg-btn${d.commPct===p?" active":""}" style="min-height:36px;font-size:0.72rem" onclick="S.sub.commPct=${p};saveState();render()">${p===0?"0%":p*100+"%"}</button>`).join("")}
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING COSTS SUMMARY -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Closing Costs Summary</div>
+
+      <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);margin:0.4rem 0 0.3rem">Buy-Side</div>
+      <div class="inline-row"><span class="inline-lbl">Buy-Side Closing</span><span class="inline-val">${fmt(buyClosing)}</span></div>
+
+      <div style="font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);margin:0.8rem 0 0.3rem">Sell-Side by Exit Strategy</div>
+
+      <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0.25rem 0.5rem;font-size:0.72rem;margin-bottom:0.5rem">
+        <div></div>
+        <div style="font-weight:600;color:var(--text);text-align:center;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.04em">Traditional</div>
+        <div style="font-weight:600;color:var(--text);text-align:center;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.04em">Seller Fin.</div>
+        <div style="font-weight:600;color:var(--text);text-align:center;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.04em">MH Package</div>
+
+        <div style="color:var(--text-3)">Commission</div>
+        <div style="text-align:center;font-family:var(--mono)">${fmt(t_comm)}</div>
+        <div style="text-align:center;font-family:var(--mono);color:var(--text-3)">—</div>
+        <div style="text-align:center;font-family:var(--mono)">${fmt(mh_comm)}</div>
+
+        <div style="color:var(--text-3)">Title / Closing</div>
+        <div style="text-align:center;font-family:var(--mono)">${fmt(t_title)}</div>
+        <div style="text-align:center;font-family:var(--mono)">${fmt(sf_title)}</div>
+        <div style="text-align:center;font-family:var(--mono)">${fmt(mh_title)}</div>
+
+        <div style="font-weight:600;color:var(--text);padding-top:0.3rem;border-top:1px solid var(--border)">Sell-Side Total</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:600;padding-top:0.3rem;border-top:1px solid var(--border)">${fmt(t_sell)}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:600;padding-top:0.3rem;border-top:1px solid var(--border)">${fmt(sf_title)}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:600;padding-top:0.3rem;border-top:1px solid var(--border)">${fmt(mh_sell)}</div>
+
+        <div style="font-weight:700;color:var(--text);padding-top:0.3rem;border-top:1px solid var(--border-strong)">All-In Closing</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;padding-top:0.3rem;border-top:1px solid var(--border-strong)">${fmt(buyClosing+t_sell)}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;padding-top:0.3rem;border-top:1px solid var(--border-strong)">${fmt(buyClosing+sf_title)}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;padding-top:0.3rem;border-top:1px solid var(--border-strong)">${fmt(buyClosing+mh_sell)}</div>
+      </div>
+      <div style="font-size:0.6rem;color:var(--text-3)">Seller finance: no broker commission — title/closing only (0.5%)</div>
+    </div>
+
+    <!-- EXIT STRATEGY TABS -->
+    <div style="display:flex;gap:0.25rem;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:0.25rem;margin-bottom:1rem;overflow-x:auto">
+      <button onclick="S.sub.exitView='trad';saveState();render()" style="flex:1;font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.exitView==='trad'?'600':'400'};padding:0.45rem 0.5rem;border-radius:6px;border:none;background:${d.exitView==='trad'?'var(--text)':'transparent'};color:${d.exitView==='trad'?'#fff':'var(--text-3)'};min-height:36px;-webkit-tap-highlight-color:transparent">Traditional</button>
+      <button onclick="S.sub.exitView='sf';saveState();render()" style="flex:1;font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.exitView==='sf'?'600':'400'};padding:0.45rem 0.5rem;border-radius:6px;border:none;background:${d.exitView==='sf'?'var(--text)':'transparent'};color:${d.exitView==='sf'?'#fff':'var(--text-3)'};min-height:36px;-webkit-tap-highlight-color:transparent">Seller Fin.</button>
+      <button onclick="S.sub.exitView='mh';saveState();render()" style="flex:1;font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.exitView==='mh'?'600':'400'};padding:0.45rem 0.5rem;border-radius:6px;border:none;background:${d.exitView==='mh'?'var(--text)':'transparent'};color:${d.exitView==='mh'?'#fff':'var(--text-3)'};min-height:36px;-webkit-tap-highlight-color:transparent">MH Package</button>
+      <button onclick="S.sub.exitView='compare';saveState();render()" style="flex:1;font-size:0.68rem;font-family:'Inter',sans-serif;font-weight:${d.exitView==='compare'?'600':'400'};padding:0.45rem 0.5rem;border-radius:6px;border:none;background:${d.exitView==='compare'?'var(--text)':'transparent'};color:${d.exitView==='compare'?'#fff':'var(--text-3)'};min-height:36px;-webkit-tap-highlight-color:transparent">Compare</button>
+    </div>
+
+
+        <!-- EXIT 1 -->
+    <div style="display:${d.exitView==='trad'||d.exitView==='compare'?'block':'none'};background:var(--surface);border:${best.name==='Traditional'?'2px solid #16a34a':'1px solid var(--border)'};border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      ${best.name==='Traditional'?`<div style="font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:0.5rem">✓ HIGHEST RETURN</div>`:""}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--text)">Traditional Lot Sale</div><div style="font-size:0.62rem;color:var(--text-3)">Sell ${numLots} lots at market price</div></div>
+        <div style="text-align:right"><div style="font-family:var(--mono);font-size:1.3rem;font-weight:600;color:${exitColor(t_net)}">${fmt(t_net)}</div><div style="font-size:0.6rem;color:var(--text-3)">${fmt(t_netLot)}/lot · ${fmtP(t_roi)} ROI</div></div>
+      </div>
+      ${sInp("ARV per Lot","lotArvTrad","$")}
+      <div class="inline-row"><span class="inline-lbl">Gross Revenue (${numLots} lots)</span><span class="inline-val">${fmt(t_rev)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total Basis</span><span class="inline-val">${fmt(totalBasis)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Commission (${d.commPct*100}%)</span><span class="inline-val">${fmt(t_comm)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Title / Closing (1%)</span><span class="inline-val">${fmt(t_title)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding-top:0.5rem;margin-top:0.2rem;border-top:2px solid var(--text)"><span style="font-size:0.82rem;font-weight:700;color:var(--text)">Net Profit</span><span style="font-family:var(--mono);font-size:0.82rem;font-weight:700;color:${exitColor(t_net)}">${fmt(t_net)}</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.7rem">
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">Margin</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(t_margin)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">CoC Return</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(t_coc)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">Break-Even</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmt(t_breakEven)}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXIT 2 -->
+    <div style="display:${d.exitView==='sf'||d.exitView==='compare'?'block':'none'};background:var(--surface);border:${best.name==='Seller Finance'?'2px solid #16a34a':'1px solid var(--border)'};border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      ${best.name==='Seller Finance'?`<div style="font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:0.5rem">✓ HIGHEST RETURN</div>`:""}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--text)">Seller Financed</div><div style="font-size:0.62rem;color:var(--text-3)">Owner-finance ${numLots} lots · earn interest</div></div>
+        <div style="text-align:right"><div style="font-family:var(--mono);font-size:1.3rem;font-weight:600;color:${exitColor(Math.round(sf_net))}">${fmt(Math.round(sf_net))}</div><div style="font-size:0.6rem;color:var(--text-3)">${fmt(sf_netLot)}/lot total</div></div>
+      </div>
+      ${sInp("Sale Price per Lot","lotArvSF","$")}
+      ${sInp("Buyer Down Payment","sfDownPct","","%")}
+      ${sInp("Interest Rate","sfRate","","%")}
+      ${sInp("Term","sfTermYrs","","yr")}
+      <div style="height:1px;background:var(--border);margin:0.5rem 0"></div>
+      <div class="inline-row"><span class="inline-lbl">Down per Lot</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(sf_downLot)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total Downs Collected</span><span class="inline-val" style="color:var(--green)">${fmt(sf_totalDowns)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Monthly per Lot</span><span class="inline-val">${fmt(Math.round(sf_pmtLot))}</span></div>
+      <div style="background:var(--accent-light);border:1px solid var(--accent-border);border-radius:8px;padding:0.7rem 0.9rem;margin:0.6rem 0;display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-size:0.62rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.06em">Monthly Cash Flow</div><div style="font-size:0.6rem;color:var(--text-3);margin-top:0.1rem">All ${numLots} lots · ${d.sfTermYrs} years</div></div>
+        <div style="font-family:var(--mono);font-size:1.2rem;font-weight:600;color:var(--accent)">${fmt(sf_monthlyAll)}</div>
+      </div>
+      <div class="inline-row"><span class="inline-lbl">Interest Earned</span><span class="inline-val" style="color:var(--green)">${fmt(sf_interestEarned)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total Collected (${d.sfTermYrs}yr)</span><span class="inline-val">${fmt(Math.round(sf_totalRev))}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total Basis</span><span class="inline-val">${fmt(totalBasis)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Title / Closing (0.5%)</span><span class="inline-val">${fmt(sf_title)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding-top:0.5rem;margin-top:0.2rem;border-top:2px solid var(--text)"><span style="font-size:0.82rem;font-weight:700;color:var(--text)">Net Profit</span><span style="font-family:var(--mono);font-size:0.82rem;font-weight:700;color:${exitColor(Math.round(sf_net))}">${fmt(Math.round(sf_net))}</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.7rem">
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">Cash Yield</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(sf_yield)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">Ann. Return</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(sf_annReturn)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">CoC Return</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(sf_coc)}</div>
+        </div>
+      </div>
+      <div style="font-size:0.6rem;color:var(--text-3);margin-top:0.5rem">No broker commission · cash yield = annual cash flow ÷ cash invested</div>
+    </div>
+
+    <!-- EXIT 3 -->
+    <div style="display:${d.exitView==='mh'||d.exitView==='compare'?'block':'none'};background:var(--surface);border:${best.name==='Mobile Home'?'2px solid #16a34a':'1px solid var(--border)'};border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:0.85rem">
+      ${best.name==='Mobile Home'?`<div style="font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:0.5rem">✓ HIGHEST RETURN</div>`:""}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--text)">Mobile Home Package</div><div style="font-size:0.62rem;color:var(--text-3)">Place homes on ${numLots} lots · sell turnkey</div></div>
+        <div style="text-align:right"><div style="font-family:var(--mono);font-size:1.3rem;font-weight:600;color:${exitColor(mh_net)}">${fmt(mh_net)}</div><div style="font-size:0.6rem;color:var(--text-3)">${fmt(mh_netLot)}/lot · ${fmtP(mh_roi)} ROI</div></div>
+      </div>
+      <!-- Model selector -->
+      <div style="margin-bottom:0.7rem">
+        <div style="font-size:0.62rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.4rem">Home Model</div>
+        <select onchange="const i=parseInt(this.value);if(i>=0){S.sub.mhHomeCost=S.modelCosts[i];S.sub.mhSetupCost=${Object.values(S.setup).reduce((a,b)=>a+b,0)};saveState();render()}" style="width:100%;font-size:0.8rem;font-family:'Inter',sans-serif;padding:0.65rem 0.8rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px">
+          <option value="-1">Custom / Manual Entry</option>
+          ${DEFAULT_MODELS.filter(m=>m.cost>0).map(m=>{const i=DEFAULT_MODELS.indexOf(m);return`<option value="${i}" ${S.modelCosts[i]===d.mhHomeCost?"selected":""}>${m.name} — ${fmt(S.modelCosts[i])} · ${m.sqft} sf</option>`;}).join("")}
+        </select>
+      </div>
+      ${sInp("ARV per Lot (home+land)","lotArvMH","$")}
+      ${sInp("Home Cost (each)","mhHomeCost","$")}
+      ${sInp("Setup Cost (each)","mhSetupCost","$")}
+      <div style="height:1px;background:var(--border);margin:0.5rem 0"></div>
+      <div class="inline-row"><span class="inline-lbl">Gross Revenue (${numLots} lots)</span><span class="inline-val">${fmt(mh_rev)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Land + Infra Basis</span><span class="inline-val">${fmt(totalBasis)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Homes (${numLots} × ${fmt(d.mhHomeCost)})</span><span class="inline-val">${fmt(mh_homeTotal)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Setup (${numLots} × ${fmt(d.mhSetupCost)})</span><span class="inline-val">${fmt(mh_setupTotal)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Total All-In Cost</span><span class="inline-val" style="font-weight:600;color:var(--text)">${fmt(mh_totalCost)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Commission (${d.commPct*100}%)</span><span class="inline-val">${fmt(mh_comm)}</span></div>
+      <div class="inline-row"><span class="inline-lbl">Title / Closing (1%)</span><span class="inline-val">${fmt(mh_title)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding-top:0.5rem;margin-top:0.2rem;border-top:2px solid var(--text)"><span style="font-size:0.82rem;font-weight:700;color:var(--text)">Net Profit</span><span style="font-family:var(--mono);font-size:0.82rem;font-weight:700;color:${exitColor(mh_net)}">${fmt(mh_net)}</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-top:0.7rem">
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">Margin</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(mh_margin)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">ROI</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(mh_roi)}</div>
+        </div>
+        <div style="text-align:center;padding:0.5rem 0.3rem;background:var(--surface-2);border-radius:6px">
+          <div style="font-size:0.55rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3)">CoC Return</div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--text);margin-top:0.2rem">${fmtP(mh_coc)}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div style="display:${d.exitView==='compare'?'block':'none'};background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.5rem">
+      <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.8rem">Side-by-Side Comparison</div>
+      <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0.3rem 0.5rem;font-size:0.68rem">
+        <div></div>
+        <div style="font-weight:600;color:var(--text);text-align:center;padding-bottom:0.3rem;border-bottom:1px solid var(--border)">Traditional</div>
+        <div style="font-weight:600;color:var(--text);text-align:center;padding-bottom:0.3rem;border-bottom:1px solid var(--border)">Seller Fin.</div>
+        <div style="font-weight:600;color:var(--text);text-align:center;padding-bottom:0.3rem;border-bottom:1px solid var(--border)">Mobile Home</div>
+        <div style="color:var(--text-3)">Revenue</div><div style="text-align:center;font-family:var(--mono)">${fmt(t_rev)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(Math.round(sf_totalRev))}</div><div style="text-align:center;font-family:var(--mono)">${fmt(mh_rev)}</div>
+        <div style="color:var(--text-3)">Total Cost</div><div style="text-align:center;font-family:var(--mono)">${fmt(totalBasis+t_sell)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(totalBasis+sf_title)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(mh_totalCost+mh_sell)}</div>
+        <div style="color:var(--text-3)">Capital Req.</div><div style="text-align:center;font-family:var(--mono)">${fmt(d.financed?hardCost-loanAmt+origFee:hardCost)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(d.financed?hardCost-loanAmt+origFee:hardCost)}</div><div style="text-align:center;font-family:var(--mono)">${fmt((d.financed?hardCost-loanAmt+origFee:hardCost)+mh_homeTotal+mh_setupTotal)}</div>
+        <div style="color:var(--text-3)">Timeline</div><div style="text-align:center">${d.loanMonths}mo</div><div style="text-align:center">${d.sfTermYrs}yr</div><div style="text-align:center">${d.loanMonths}mo</div>
+        <div style="font-weight:700;color:var(--text);padding-top:0.4rem;border-top:2px solid var(--text)">Net Profit</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;color:${exitColor(t_net)};padding-top:0.4rem;border-top:2px solid var(--text)">${fmt(t_net)}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;color:${exitColor(Math.round(sf_net))};padding-top:0.4rem;border-top:2px solid var(--text)">${fmt(Math.round(sf_net))}</div>
+        <div style="text-align:center;font-family:var(--mono);font-weight:700;color:${exitColor(mh_net)};padding-top:0.4rem;border-top:2px solid var(--text)">${fmt(mh_net)}</div>
+        <div style="color:var(--text-3)">Per Lot</div><div style="text-align:center;font-family:var(--mono);color:${exitColor(t_net)}">${fmt(t_netLot)}</div><div style="text-align:center;font-family:var(--mono);color:${exitColor(Math.round(sf_net))}">${fmt(sf_netLot)}</div><div style="text-align:center;font-family:var(--mono);color:${exitColor(mh_net)}">${fmt(mh_netLot)}</div>
+        <div style="color:var(--text-3)">Margin</div><div style="text-align:center;font-family:var(--mono)">${fmtP(t_margin)}</div><div style="text-align:center;font-family:var(--mono)">${fmtP(sf_margin)}</div><div style="text-align:center;font-family:var(--mono)">${fmtP(mh_margin)}</div>
+        <div style="color:var(--text-3)">CoC Return</div><div style="text-align:center;font-family:var(--mono)">${fmtP(t_coc)}</div><div style="text-align:center;font-family:var(--mono)">${fmtP(sf_coc)}</div><div style="text-align:center;font-family:var(--mono)">${fmtP(mh_coc)}</div>
+        <div style="color:var(--text-3)">Cash Req.</div><div style="text-align:center;font-family:var(--mono)">${fmt(cashReq)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(cashReq)}</div><div style="text-align:center;font-family:var(--mono)">${fmt(mh_cashReq)}</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem">
+      <button onclick="printSubPDF()" style="width:100%;background:var(--text);border:none;border-radius:10px;color:#fff;padding:1rem;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.02em;display:flex;align-items:center;justify-content:center;gap:0.6rem;min-height:48px">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+        Print Subdivision Summary — PDF
+      </button>
+      <button onclick="generateMemo('land')" style="width:100%;background:var(--accent);border:none;border-radius:10px;color:#fff;padding:1rem;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:0.02em;display:flex;align-items:center;justify-content:center;gap:0.6rem;min-height:48px">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4v1a1 1 0 01-1 1H9a1 1 0 01-1-1V6a4 4 0 014-4z"/><path d="M8 7v3a4 4 0 008 0V7"/><path d="M12 14v4m-4 2h8"/></svg>
+        Generate AI Deal Memo
+      </button>
+    </div>
+  </div>`;
+}
+
+
+/* ═══════════════════════════════════════════
+   PRINT — SUBDIVISION PDF
+   ═══════════════════════════════════════════ */
+function printSubPDF(){
+  const d=S.sub;
+  const numLots=Math.max(1,Math.floor(d.totalFrontage/d.ftPerLot));
+  const numMeters=d.numMetersOverride>0?d.numMetersOverride:numLots;
+  const waterCost=numMeters*d.waterMeterCost;
+  const electricTotal=d.electricPerLot*numLots;
+  const totalInfra=waterCost+d.miscWaterCost+electricTotal+d.surveyCost+d.roadCost+d.attorneyFees+d.filingFees+d.custom1+d.custom2;
+  const buyClosing=d.buyClosingOverride>0?d.buyClosingOverride:Math.round(d.landPrice*0.005);
+  const hardCost=d.landPrice+totalInfra+buyClosing;
+  let loanAmt=0,origFee=0,interest=0,totalFin=0;
+  if(d.financed){loanAmt=Math.round(hardCost*(d.ltcPct/100));origFee=Math.round(loanAmt*(d.originationPts/100));interest=Math.round((loanAmt*(d.interestRate/100)/12)*d.loanMonths);totalFin=origFee+interest;}
+  const holdPropTax=Math.round(hardCost*(d.holdTaxRate/100)*(d.loanMonths/12));
+  const totalHold=holdPropTax+d.holdInsurance+d.holdMaint;
+  let rollbackTotal=0;
+  if(d.agExemption&&d.marketValue>d.agValue){const ad=(d.marketValue-d.agValue)*(d.holdTaxRate/100);rollbackTotal=Math.round(ad*d.rollbackYears)+Math.round(ad*(d.rollbackInterest/100)*(d.rollbackYears*(d.rollbackYears+1)/2));}
+  const totalBasis=hardCost+totalFin+totalHold+rollbackTotal;
+  const basisPerLot=Math.round(totalBasis/numLots);
+  const t_rev=numLots*d.lotArvTrad,t_comm=Math.round(t_rev*d.commPct),t_title=Math.round(t_rev*0.01),t_sell=t_comm+t_title,t_net=t_rev-totalBasis-t_sell;
+  const sf_downLot=Math.round(d.lotArvSF*(d.sfDownPct/100)),sf_loanLot=d.lotArvSF-sf_downLot,sf_r=d.sfRate/100/12,sf_n=d.sfTermYrs*12;
+  const sf_pmtLot=sf_r>0?sf_loanLot*(sf_r*Math.pow(1+sf_r,sf_n))/(Math.pow(1+sf_r,sf_n)-1):sf_loanLot/sf_n;
+  const sf_totalRev=(sf_downLot+sf_pmtLot*sf_n)*numLots,sf_title=Math.round(numLots*d.lotArvSF*0.005),sf_net=sf_totalRev-totalBasis-sf_title;
+  const sf_monthlyAll=Math.round(sf_pmtLot*numLots);
+  const mh_homeTotal=numLots*d.mhHomeCost,mh_setupTotal=numLots*d.mhSetupCost,mh_totalCost=totalBasis+mh_homeTotal+mh_setupTotal;
+  const mh_rev=numLots*d.lotArvMH,mh_comm=Math.round(mh_rev*d.commPct),mh_title=Math.round(mh_rev*0.01),mh_sell=mh_comm+mh_title,mh_net=mh_rev-mh_totalCost-mh_sell;
+  const today=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  const row=(l,v,indent,bold)=>`<tr style="${bold?"font-weight:600;border-top:1px solid #ccc":""}"><td style="padding:${bold?"6px 8px":"4px 8px 4px "+(indent?"24px":"8px")};color:${bold?"#111":"#444"};font-size:${bold?"13px":"12px"}">${l}</td><td style="padding:${bold?"6px 8px":"4px 8px"};text-align:right;font-family:'Courier New',monospace;color:${bold?"#111":"#333"};font-size:${bold?"13px":"12px"};font-weight:${bold?"600":"400"}">${v}</td></tr>`;
+  const exitColor=(net)=>net>=0?"#16a34a":"#dc2626";
+
+  const win=window.open("","_blank");
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Range Land Group — Subdivision Analysis</title>
+  <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111;background:#fff;padding:48px;font-size:13px;line-height:1.5}@media print{body{padding:32px}@page{margin:0.6in;size:letter}}h1{font-size:22px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#111}h2{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin:24px 0 8px;border-bottom:2px solid #111;padding-bottom:4px}table{width:100%;border-collapse:collapse}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}.meta{display:flex;gap:24px;margin:16px 0 24px;padding:16px;background:#f8f8f8;border-radius:6px}.meta-item{text-align:center;flex:1}.meta-lbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999}.meta-val{font-size:20px;font-weight:300;font-family:'Courier New',monospace;margin-top:4px}.footer{margin-top:40px;padding-top:16px;border-top:1px solid #ddd;font-size:10px;color:#aaa;display:flex;justify-content:space-between}</style></head><body>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #111">
+    <div><h1>Range Land Group</h1><div style="font-size:11px;color:#999;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">Land Subdivision Analysis</div>
+    ${S.dealName?`<div style="font-size:15px;font-weight:600;color:#111;margin-top:8px">${esc(S.dealName)}</div>`:""}
+    ${S.dealAddress?`<div style="font-size:11px;color:#666;margin-top:2px">${esc(S.dealAddress)}</div>`:""}
+    ${S.notes?`<div style="font-size:11px;color:#888;margin-top:4px;font-style:italic">${esc(S.notes)}</div>`:""}</div>
+    <div style="text-align:right;font-size:11px;color:#999"><div>Prepared: ${today}</div><div style="margin-top:2px">Range Land Group</div></div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-item"><div class="meta-lbl">Lots</div><div class="meta-val">${numLots}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">Total Basis</div><div class="meta-val">${fmt(totalBasis)}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">Per Lot</div><div class="meta-val">${fmt(basisPerLot)}</div></div>
+  </div>
+
+  <div class="two-col"><div>
+    <h2>Land & Infrastructure</h2><table>
+    ${row("Land Purchase",fmt(d.landPrice),true)}
+    ${row("Frontage",d.totalFrontage+" ft ÷ "+d.ftPerLot+" ft = "+numLots+" lots",true)}
+    ${row("Water Meters ("+numMeters+" × "+fmt(d.waterMeterCost)+")",fmt(waterCost),true)}
+    ${d.miscWaterCost?row("Misc Water",fmt(d.miscWaterCost),true):""}
+    ${row("Electrical ("+fmt(d.electricPerLot)+"/lot × "+numLots+")",fmt(electricTotal),true)}
+    ${d.surveyCost?row("Survey / Plat",fmt(d.surveyCost),true):""}
+    ${d.roadCost?row("Road / Access",fmt(d.roadCost),true):""}
+    ${d.attorneyFees?row("Attorney Fees",fmt(d.attorneyFees),true):""}
+    ${row("Filing Fees",fmt(d.filingFees),true)}
+    ${d.custom1?row(d.c1lbl,fmt(d.custom1),true):""}
+    ${d.custom2?row(d.c2lbl,fmt(d.custom2),true):""}
+    ${row("Total Infrastructure",fmt(totalInfra),false,true)}
+    ${row("Buy-Side Closing",fmt(buyClosing),true)}
+    ${row("Hard Cost",fmt(hardCost),false,true)}
+    </table>
+
+    ${d.financed?`<h2>Financing</h2><table>
+    ${row("Loan Amount ("+d.ltcPct+"% LTC)",fmt(loanAmt),true)}
+    ${row("Origination ("+d.originationPts+" pts)",fmt(origFee),true)}
+    ${row("Interest ("+d.loanMonths+"mo @ "+d.interestRate+"%)",fmt(interest),true)}
+    ${row("Total Financing",fmt(totalFin),false,true)}
+    </table>`:""}
+
+    <h2>Holding Costs (${d.loanMonths} mo)</h2><table>
+    ${row("Property Tax ("+d.holdTaxRate+"% · "+d.loanMonths+"mo)",fmt(holdPropTax),true)}
+    ${d.holdInsurance?row("Insurance",fmt(d.holdInsurance),true):""}
+    ${d.holdMaint?row("Maintenance",fmt(d.holdMaint),true):""}
+    ${row("Total Holding",fmt(totalHold),false,true)}
+    </table>
+
+    ${rollbackTotal?`<h2>Rollback Taxes (Ag Exemption)</h2><table>
+    ${row("Ag Value",fmt(d.agValue),true)}
+    ${row("Market Value",fmt(d.marketValue),true)}
+    ${row("Tax Rate",d.holdTaxRate+"%",true)}
+    ${row("Rollback Period",d.rollbackYears+" years @ "+d.rollbackInterest+"% interest",true)}
+    ${row("Total Rollback Taxes",fmt(rollbackTotal),false,true)}
+    </table>`:""}
+
+    <h2>Total Basis</h2><table>
+    ${row("Hard Cost",fmt(hardCost),true)}
+    ${d.financed?row("Financing",fmt(totalFin),true):""}
+    ${row("Holding",fmt(totalHold),true)}
+    ${rollbackTotal?row("Rollback Taxes",fmt(rollbackTotal),true):""}
+    ${row("Total Basis",fmt(totalBasis),false,true)}
+    ${row("Per Lot",fmt(basisPerLot),true)}
+    </table>
+  </div><div>
+
+    <h2>Exit 1 — Traditional Lot Sale</h2><table>
+    ${row("ARV per Lot",fmt(d.lotArvTrad),true)}
+    ${row("Gross Revenue ("+numLots+" lots)",fmt(t_rev),true)}
+    ${row("Commission ("+d.commPct*100+"%)",fmt(t_comm),true)}
+    ${row("Title (1%)",fmt(t_title),true)}
+    ${row("Total Basis",fmt(totalBasis),true)}
+    ${row("Net Profit",fmt(t_net),false,true)}
+    </table>
+
+    <h2>Exit 2 — Seller Financed</h2><table>
+    ${row("Sale Price per Lot",fmt(d.lotArvSF),true)}
+    ${row("Buyer Down ("+d.sfDownPct+"%)",fmt(sf_downLot)+" × "+numLots+" = "+fmt(sf_downLot*numLots),true)}
+    ${row("Rate / Term",d.sfRate+"% / "+d.sfTermYrs+" years",true)}
+    ${row("Monthly Cash Flow (all lots)",fmt(sf_monthlyAll),true)}
+    ${row("Total Collected ("+d.sfTermYrs+"yr)",fmt(Math.round(sf_totalRev)),true)}
+    ${row("Title (0.5%)",fmt(sf_title),true)}
+    ${row("Total Basis",fmt(totalBasis),true)}
+    ${row("Net Profit",fmt(Math.round(sf_net)),false,true)}
+    </table>
+
+    <h2>Exit 3 — Mobile Home Package</h2><table>
+    ${row("ARV per Lot (home+land)",fmt(d.lotArvMH),true)}
+    ${row("Home Cost (×"+numLots+")",fmt(mh_homeTotal),true)}
+    ${row("Setup Cost (×"+numLots+")",fmt(mh_setupTotal),true)}
+    ${row("Gross Revenue",fmt(mh_rev),true)}
+    ${row("Total Cost (basis+homes+setup)",fmt(mh_totalCost),true)}
+    ${row("Commission ("+d.commPct*100+"%)",fmt(mh_comm),true)}
+    ${row("Title (1%)",fmt(mh_title),true)}
+    ${row("Net Profit",fmt(mh_net),false,true)}
+    </table>
+
+    <h2>Comparison Summary</h2>
+    <table><tr style="border-bottom:2px solid #111"><td style="padding:6px 8px;font-weight:600"></td><td style="padding:6px 8px;text-align:center;font-weight:600;font-size:11px">Traditional</td><td style="padding:6px 8px;text-align:center;font-weight:600;font-size:11px">Seller Fin.</td><td style="padding:6px 8px;text-align:center;font-weight:600;font-size:11px">MH Package</td></tr>
+    <tr><td style="padding:4px 8px;font-size:12px;color:#666">Revenue</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(t_rev)}</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(Math.round(sf_totalRev))}</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(mh_rev)}</td></tr>
+    <tr style="border-top:1px solid #ddd;font-weight:600"><td style="padding:6px 8px;font-size:13px">Net Profit</td><td style="padding:6px 8px;text-align:center;font-family:'Courier New',monospace;font-size:13px;color:${exitColor(t_net)}">${fmt(t_net)}</td><td style="padding:6px 8px;text-align:center;font-family:'Courier New',monospace;font-size:13px;color:${exitColor(Math.round(sf_net))}">${fmt(Math.round(sf_net))}</td><td style="padding:6px 8px;text-align:center;font-family:'Courier New',monospace;font-size:13px;color:${exitColor(mh_net)}">${fmt(mh_net)}</td></tr>
+    <tr><td style="padding:4px 8px;font-size:12px;color:#666">Per Lot</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(Math.round(t_net/numLots))}</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(Math.round(sf_net/numLots))}</td><td style="padding:4px 8px;text-align:center;font-family:'Courier New',monospace;font-size:12px">${fmt(Math.round(mh_net/numLots))}</td></tr>
+    </table>
+
+  </div></div>
+  <div class="footer"><span>Range Land Group · Confidential</span><span>Generated ${today}</span></div>
+  <script>window.onload=function(){window.print();}<\/script></body></html>`);
+  win.document.close();
+}
+
+/* ═══════════════════════════════════════════
+   AI DEAL MEMO GENERATOR
+   ═══════════════════════════════════════════ */
+function generateMemo(type){
+  // Build deal summary from current state
+  let dealData='';
+  const today=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+
+  if(type==='home'){
+    const c=recalc();
+    dealData=`
+HOME + LAND DEAL ANALYSIS
+Deal: ${S.dealName||'Unnamed'} | ${S.dealAddress||'No address'} | ${today}
+Notes: ${S.notes||'None'}
+Home Model: ${c.modelName} (${c.sqft?c.sqft+' sqft':''}) - Cost: ${fmt(c.hc)}
+Lot Cost: ${fmt(S.lotCost)} | Sale Price/ARV: ${fmt(S.salePrice)}
+${c.sqft?'Price/sqft: $'+c.priceSqft+' | Cost/sqft: $'+c.costSqft:''}
+Setup Costs: ${fmt(c.st)} | Total Hard Cost: ${fmt(c.hard)}
+Financing: ${S.financed?fmt(c.loanAmt)+' loan at '+S.interestRate+'% for '+S.loanMonths+'mo, '+fmt(c.tfin)+' total financing':'Cash deal'}
+${S.financed?'LTV: '+fmtP(c.ltv)+' | Down Payment: '+fmt(c.downPayment):''}
+Holding Costs: ${fmt(c.ht)} (${S.loanMonths} months)
+Selling Costs: ${fmt(c.tsell)} (${S.commPct*100}% commission)
+Seller Credit: ${fmt(S.sellerCredit)}
+Total All-In: ${fmt(c.total)}
+NET PROFIT: ${fmt(c.net)} | Margin: ${fmtP(c.margin)} | ROI: ${fmtP(c.roi)}
+Cash to Close: ${fmt(c.cashToClose)} | CoC Return: ${c.coc!==null?fmtP(c.coc):'N/A'}
+Break-Even: ${fmt(c.breakEven)} | Cushion: ${fmt(S.salePrice-c.breakEven)}
+Go/No-Go: ${c.net>=35000?'GO - Clears $35K threshold':c.net>=0?'CAUTION - Below $35K':'NO GO - Negative return'}`;
+  } else {
+    const d=S.sub;
+    const numLots=Math.max(1,Math.floor(d.totalFrontage/d.ftPerLot));
+    const numMeters=d.numMetersOverride>0?d.numMetersOverride:numLots;
+    const waterCost=numMeters*d.waterMeterCost;
+    const electricTotal=d.electricPerLot*numLots;
+    const totalInfra=waterCost+d.miscWaterCost+electricTotal+d.surveyCost+d.roadCost+d.attorneyFees+d.filingFees+d.custom1+d.custom2;
+    const buyClosing=d.buyClosingOverride>0?d.buyClosingOverride:Math.round(d.landPrice*0.005);
+    const hardCost=d.landPrice+totalInfra+buyClosing;
+    let loanAmt=0,totalFin=0;
+    if(d.financed){loanAmt=Math.round(hardCost*(d.ltcPct/100));const origFee=Math.round(loanAmt*(d.originationPts/100));const interest=Math.round((loanAmt*(d.interestRate/100)/12)*d.loanMonths);totalFin=origFee+interest;}
+    const holdPropTax=Math.round(hardCost*(d.holdTaxRate/100)*(d.loanMonths/12));
+    const totalHold=holdPropTax+d.holdInsurance+d.holdMaint;
+    let rollbackTotal=0;
+    if(d.agExemption&&d.marketValue>d.agValue){const ad=(d.marketValue-d.agValue)*(d.holdTaxRate/100);rollbackTotal=Math.round(ad*d.rollbackYears)+Math.round(ad*(d.rollbackInterest/100)*(d.rollbackYears*(d.rollbackYears+1)/2));}
+    const totalBasis=hardCost+totalFin+totalHold+rollbackTotal;
+    // Exits
+    const t_rev=numLots*d.lotArvTrad,t_sell=Math.round(t_rev*d.commPct)+Math.round(t_rev*0.01),t_net=t_rev-totalBasis-t_sell;
+    const sf_downLot=Math.round(d.lotArvSF*(d.sfDownPct/100)),sf_loanLot=d.lotArvSF-sf_downLot,sf_r=d.sfRate/100/12,sf_n=d.sfTermYrs*12;
+    const sf_pmtLot=sf_r>0?sf_loanLot*(sf_r*Math.pow(1+sf_r,sf_n))/(Math.pow(1+sf_r,sf_n)-1):sf_loanLot/sf_n;
+    const sf_totalRev=(sf_downLot+sf_pmtLot*sf_n)*numLots,sf_net=sf_totalRev-totalBasis-Math.round(numLots*d.lotArvSF*0.005);
+    const mh_totalCost=totalBasis+numLots*d.mhHomeCost+numLots*d.mhSetupCost,mh_rev=numLots*d.lotArvMH;
+    const mh_sell=Math.round(mh_rev*d.commPct)+Math.round(mh_rev*0.01),mh_net=mh_rev-mh_totalCost-mh_sell;
+
+    dealData=`
+LAND SUBDIVISION ANALYSIS
+Deal: ${S.dealName||'Unnamed'} | ${S.dealAddress||'No address'} | ${today}
+Notes: ${S.notes||'None'}
+Land Price: ${fmt(d.landPrice)} | Frontage: ${d.totalFrontage}ft | Lot Width: ${d.ftPerLot}ft
+Number of Lots: ${numLots}
+Infrastructure: ${fmt(totalInfra)} (Water: ${fmt(waterCost+d.miscWaterCost)}, Electric: ${fmt(electricTotal)}, Survey: ${fmt(d.surveyCost)}, Road: ${fmt(d.roadCost)})
+Buy Closing: ${fmt(buyClosing)} | Hard Cost: ${fmt(hardCost)}
+Financing: ${d.financed?fmt(loanAmt)+' loan at '+d.interestRate+'% for '+d.loanMonths+'mo, '+fmt(totalFin)+' total financing':'Cash deal'}
+Holding: ${fmt(totalHold)} (${d.loanMonths} months)
+${rollbackTotal?'Rollback Taxes (Ag Exemption): '+fmt(rollbackTotal):'No ag exemption rollback'}
+Total Basis: ${fmt(totalBasis)} | Per Lot: ${fmt(Math.round(totalBasis/numLots))}
+
+EXIT STRATEGY 1 - Traditional Lot Sale:
+ARV/lot: ${fmt(d.lotArvTrad)} | Revenue: ${fmt(t_rev)} | Net: ${fmt(t_net)} | Per lot: ${fmt(Math.round(t_net/numLots))}
+
+EXIT STRATEGY 2 - Seller Financed:
+Price/lot: ${fmt(d.lotArvSF)} | ${d.sfDownPct}% down, ${d.sfRate}% rate, ${d.sfTermYrs}yr
+Monthly cash flow (all lots): ${fmt(Math.round(sf_pmtLot*numLots))} | Total collected: ${fmt(Math.round(sf_totalRev))} | Net: ${fmt(Math.round(sf_net))}
+
+EXIT STRATEGY 3 - Mobile Home Package:
+ARV/lot: ${fmt(d.lotArvMH)} | Home: ${fmt(d.mhHomeCost)} | Setup: ${fmt(d.mhSetupCost)}
+Revenue: ${fmt(mh_rev)} | Total cost: ${fmt(mh_totalCost)} | Net: ${fmt(mh_net)}
+
+Best exit: ${[{n:'Traditional',v:t_net},{n:'Seller Finance',v:Math.round(sf_net)},{n:'MH Package',v:mh_net}].sort((a,b)=>b.v-a.v)[0].n}`;
+  }
+
+  // Show loading modal
+  showMemoModal('Generating deal memo...','<div style="text-align:center;padding:2rem;color:var(--text-3)"><div style="font-size:0.85rem;margin-bottom:0.5rem">Analyzing deal...</div><div style="font-size:0.72rem">Powered by Claude AI</div></div>');
+
+  // Call Anthropic API
+  fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",
+      max_tokens:1000,
+      messages:[{role:"user",content:`You are a real estate investment analyst writing a concise deal memo for Range Land Group, a Texas-based land and manufactured home company. Write a professional 1-page deal memo based on this data. Include: Executive Summary (2-3 sentences), Key Numbers (bullet the critical metrics), Risk Factors (2-3 specific risks based on the numbers), Recommendation (clear go/no-go with reasoning). Keep it sharp, direct, no fluff. Use dollar amounts and percentages. Address it as an internal memo.\n\n${dealData}`}]
+    })
+  })
+  .then(r=>r.json())
+  .then(data=>{
+    const text=data.content?.map(b=>b.text||'').join('\n')||'Error: No response received.';
+    const html=text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/^## (.*?)(<br>)/gm,'<h3 style="font-size:0.85rem;font-weight:700;margin:1rem 0 0.3rem;color:var(--text)">$1</h3>').replace(/^# (.*?)(<br>)/gm,'<h2 style="font-size:1rem;font-weight:700;margin:0.5rem 0;color:var(--text)">$1</h2>').replace(/- (.*?)(<br>)/g,'<div style="padding-left:1rem;margin:0.15rem 0">• $1</div>');
+    showMemoModal('AI Deal Memo',`<div style="font-size:0.8rem;line-height:1.65;color:var(--text-2)">${html}</div>`);
+  })
+  .catch(err=>{
+    showMemoModal('Error',`<div style="color:var(--red);font-size:0.82rem">Failed to generate memo. ${err.message||'Check your connection.'}</div>`);
+  });
+}
+
+function showMemoModal(title,content){
+  // Remove existing modal
+  const existing=document.getElementById('memo-modal');
+  if(existing)existing.remove();
+
+  const modal=document.createElement('div');
+  modal.id='memo-modal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)';
+  modal.innerHTML=`
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:14px;max-width:600px;width:100%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);flex-shrink:0">
+        <div style="display:flex;align-items:center;gap:0.6rem">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
+          <span style="font-size:0.82rem;font-weight:600;color:var(--text)">${title}</span>
+        </div>
+        <div style="display:flex;gap:0.4rem">
+          <button onclick="copyMemo()" style="font-size:0.68rem;font-family:'Inter',sans-serif;padding:0.35rem 0.75rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);min-height:32px;cursor:pointer">Copy</button>
+          <button onclick="document.getElementById('memo-modal').remove()" style="font-size:0.68rem;font-family:'Inter',sans-serif;padding:0.35rem 0.75rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-3);min-height:32px;cursor:pointer">Close</button>
+        </div>
+      </div>
+      <div id="memo-content" style="padding:1.4rem;overflow-y:auto;-webkit-overflow-scrolling:touch">${content}</div>
+    </div>`;
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+  document.body.appendChild(modal);
+}
+
+function copyMemo(){
+  const el=document.getElementById('memo-content');
+  if(!el)return;
+  const text=el.innerText||el.textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('#memo-modal button');
+    if(btn){btn.textContent='Copied ✓';setTimeout(()=>btn.textContent='Copy',1500);}
+  });
+}
+
+/* ═══════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════ */
+function nf(label,key){
+  const val=eval(key);
+  return`<div class="field"><div class="field-lbl">${label}</div>
+    <div class="field-row"><span class="field-pre">$</span>
+      <input class="field-inp" type="tel" inputmode="numeric" value="${val}"
+        onblur="${key}=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+        onkeydown="if(event.key==='Enter')this.blur()" />
+    </div></div>`;
+}
+function sl(key,lbl){
+  return`<div class="sl"><span class="sl-lbl">${lbl}</span>
+    <div class="sl-wrap"><span class="sl-pre">$</span>
+      <input class="sl-inp" type="tel" inputmode="numeric" value="${S.setup[key]}"
+        onblur="S.setup['${key}']=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+        onkeydown="if(event.key==='Enter')this.blur()" />
+    </div></div>`;
+}
+function hl(key,lbl){
+  return`<div class="sl"><span class="sl-lbl">${lbl}</span>
+    <div class="sl-wrap"><span class="sl-pre">$</span>
+      <input class="sl-inp" type="tel" inputmode="numeric" value="${S.holding[key]}"
+        onblur="S.holding['${key}']=parseInt(this.value.replace(/[^0-9]/g,''))||0;saveState();render()"
+        onkeydown="if(event.key==='Enter')this.blur()" />
+    </div></div>`;
+}
+function cr(label,value,indent,bold){
+  const neg=String(value).startsWith("-");
+  const isZero=value==="$0";
+  if(isZero&&indent&&!bold)return"";
+  return`<div class="cs-row${indent?" in":""}${bold?" b":""}${neg?" neg":""}" ${isZero&&!bold?'style="opacity:0.35"':""}>
+    <span class="cs-lbl">${label}</span><span class="cs-val">${value}</span>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   PDF PRINT
+   ═══════════════════════════════════════════ */
+function printPDF(){
+  const c=recalc();
+  const good=c.net>=MINP,warn=c.net>=0&&c.net<MINP;
+  const pc=good?"#16a34a":warn?"#b45309":"#dc2626";
+  const il=good?"GO — Clears $35K Threshold":warn?"CAUTION — Below $35K Threshold":"NO GO — Negative Return";
+  const today=new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  const modelName=c.modelName;
+  const ltvCol=c.ltv<=0.65?"#16a34a":c.ltv<=0.75?"#b45309":"#dc2626";
+  const ltvLabel=c.ltv<=0.65?"Strong":c.ltv<=0.75?"Acceptable":"High Risk";
+
+  const row=(l,v,indent,bold)=>`<tr style="${bold?"font-weight:600;border-top:1px solid #ccc":""}">
+    <td style="padding:${bold?"6px 8px":"4px 8px 4px "+(indent?"24px":"8px")};color:${bold?"#111":"#444"};font-size:${bold?"13px":"12px"}">${l}</td>
+    <td style="padding:${bold?"6px 8px":"4px 8px"};text-align:right;font-family:'Courier New',monospace;color:${bold?"#111":v.startsWith("-")?"#dc2626":"#333"};font-size:${bold?"13px":"12px"};font-weight:${bold?"600":"400"}">${v}</td>
+  </tr>`;
+
+  const win=window.open("","_blank");
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>Range Land Group — Deal Analysis</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111;background:#fff;padding:48px;font-size:13px;line-height:1.5}
+    @media print{body{padding:32px}@page{margin:0.6in;size:letter}}
+    h1{font-size:22px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#111}
+    h2{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin:24px 0 8px;border-bottom:2px solid #111;padding-bottom:4px}
+    table{width:100%;border-collapse:collapse}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}
+    .meta{display:flex;gap:32px;margin:16px 0 24px;padding:16px;background:#f8f8f8;border-radius:6px}
+    .meta-item{text-align:center;flex:1}
+    .meta-lbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999}
+    .meta-val{font-size:22px;font-weight:300;font-family:'Courier New',monospace;margin-top:4px}
+    .indicator{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:6px;margin-bottom:20px}
+    .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .ind-lbl{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #ddd;font-size:10px;color:#aaa;display:flex;justify-content:space-between}
+    .net-row{display:flex;justify-content:space-between;padding:8px;background:#111;color:#fff;border-radius:4px;margin-top:8px}
+    .net-lbl{font-size:14px;font-weight:700}
+    .net-val{font-family:'Courier New',monospace;font-size:14px;font-weight:700;color:${pc}}
+  </style></head><body>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #111">
+    <div>
+      <h1>Range Land Group</h1>
+      <div style="font-size:11px;color:#999;margin-top:4px;letter-spacing:0.08em;text-transform:uppercase">Home + Land Deal Analysis</div>
+      ${S.dealName?`<div style="font-size:15px;font-weight:600;color:#111;margin-top:8px">${esc(S.dealName)}</div>`:""}
+      ${S.dealAddress?`<div style="font-size:11px;color:#666;margin-top:2px">${esc(S.dealAddress)}</div>`:""}
+      ${S.notes?`<div style="font-size:11px;color:#888;margin-top:4px;font-style:italic">${esc(S.notes)}</div>`:""}
+    </div>
+    <div style="text-align:right;font-size:11px;color:#999">
+      <div>Prepared: ${today}</div>
+      <div style="margin-top:2px">Emerton Homes · Range Land Group</div>
+    </div>
+  </div>
+
+  <div class="indicator" style="background:${good?"#f0fdf4":warn?"#fffbeb":"#fef2f2"};border:1px solid ${good?"#bbf7d0":warn?"#fde68a":"#fecaca"}">
+    <div class="dot" style="background:${pc}"></div>
+    <div class="ind-lbl" style="color:${pc}">${il}</div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-item"><div class="meta-lbl">Net Profit</div><div class="meta-val" style="color:${pc}">${fmt(c.net)}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">Margin</div><div class="meta-val">${fmtP(c.margin)}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">ROI</div><div class="meta-val">${fmtP(c.roi)}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">CoC Return</div><div class="meta-val">${c.coc!==null?fmtP(c.coc):"—"}</div></div>
+    <div class="meta-item" style="border-left:1px solid #ddd"><div class="meta-lbl">Cash to Close</div><div class="meta-val">${fmt(c.cashToClose)}</div></div>
+  </div>
+
+  ${c.sqft?`<div style="text-align:center;font-size:12px;color:#666;margin:-12px 0 20px;font-family:'Courier New',monospace">$${c.priceSqft}/sqft sale · $${c.costSqft}/sqft cost · ${c.sqft.toLocaleString()} sqft home</div>`:""}
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px">
+    <div style="padding:12px;background:#f8f8f8;border-radius:6px;text-align:center">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999">LTV</div>
+      <div style="font-size:20px;font-family:'Courier New',monospace;font-weight:600;color:${ltvCol};margin-top:4px">${fmtP(c.ltv)}</div>
+      <div style="font-size:10px;color:${ltvCol};margin-top:2px">Loan-to-Value · ${ltvLabel}</div>
+    </div>
+    <div style="padding:12px;background:#f8f8f8;border-radius:6px;text-align:center">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999">Break-Even</div>
+      <div style="font-size:20px;font-family:'Courier New',monospace;font-weight:600;color:#111;margin-top:4px">${fmt(c.breakEven)}</div>
+      <div style="font-size:10px;color:#666;margin-top:2px">${fmt(S.salePrice-c.breakEven)} cushion to ARV</div>
+    </div>
+    <div style="padding:12px;background:#f8f8f8;border-radius:6px;text-align:center">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999">Cash-on-Cash</div>
+      <div style="font-size:20px;font-family:'Courier New',monospace;font-weight:600;color:#111;margin-top:4px">${c.coc!==null?fmtP(c.coc):"—"}</div>
+      <div style="font-size:10px;color:#666;margin-top:2px">${fmt(c.cashToClose)} cash deployed</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+  <div>
+    <h2>Hard Costs</h2>
+    <table>
+      ${row("Lot / Land",fmt(S.lotCost),true)}
+      ${row(`Home — ${modelName}`,fmt(c.hc),true)}
+      <tr><td colspan="2" style="padding:6px 8px;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa">Site Work</td></tr>
+      ${row("House Pad",fmt(S.setup.housePad),true)}
+      ${row("Driveway Base",fmt(S.setup.driveway),true)}
+      ${row("Culvert",fmt(S.setup.culvert),true)}
+      ${row("Final Grade",fmt(S.setup.grading),true)}
+      <tr><td colspan="2" style="padding:6px 8px;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa">Utilities</td></tr>
+      ${row("Septic System",fmt(S.setup.septic),true)}
+      ${row("Plumbing to Septic",fmt(S.setup.plumbing),true)}
+      ${row("Water Line",fmt(S.setup.waterLine),true)}
+      ${row("Electric (Underground)",fmt(S.setup.electric),true)}
+      ${row("Electrical Post",fmt(S.setup.electricPost),true)}
+      <tr><td colspan="2" style="padding:6px 8px;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa">Home Setup</td></tr>
+      ${row("Set & Level",fmt(S.setup.setLevel),true)}
+      ${row("Interior Trim",fmt(c.effectiveTrim)+(c.isClayton?" (auto-adjusted)":""),true)}
+      ${row("FHA Retrofit",fmt(S.setup.fhaRetrofit),true)}
+      ${row("Skirting",fmt(S.setup.skirting),true)}
+      ${row("Decks",fmt(S.setup.decks),true)}
+      ${row("HVAC",fmt(S.setup.hvac),true)}
+      ${S.setup.demo?row("Demo / Teardown",fmt(S.setup.demo),true):""}
+      ${S.setup.custom1?row(S.c1lbl,fmt(S.setup.custom1),true):""}
+      ${S.setup.custom2?row(S.c2lbl,fmt(S.setup.custom2),true):""}
+      ${row("Contingency / Buffer",fmt(S.setup.contingency),true)}
+      ${row("Total Hard Cost",fmt(c.hard),false,true)}
+      ${c.sqft?row("Cost per Sqft","$"+c.costSqft+"/sqft · "+c.sqft.toLocaleString()+" sf",true):""}
+    </table>
+  </div>
+
+  <div>
+    <h2>Financing</h2>
+    <table>
+      ${S.financed?`
+      ${row("Hard Cost (Loan Basis)",fmt(c.hard),true)}
+      ${row(`LTC % (Lender covers)`,S.ltcPct+"% → "+fmt(c.loanByLTC),true)}
+      ${row(`LTV Cap (Max of ARV)`,S.ltvCapPct+"% → "+fmt(c.loanByLTV),true)}
+      ${row(`Loan Amount (MIN of above)`,fmt(c.loanAmt),false,true)}
+      ${row(`Interest Rate`,S.interestRate+"%",true)}
+      ${row(`Origination Points`,S.originationPts+" pts",true)}
+      ${row(`Loan Term`,S.loanMonths+" months",true)}
+      ${row(`Origination Fee`,fmt(c.orig),true)}
+      ${row(`Interest (${S.loanMonths} mo @ ${S.interestRate}%)`,fmt(c.intr),true)}
+      ${row("Total Financing",fmt(c.tfin),false,true)}`
+      :row("Cash Deal — No Financing","$0",false,true)}
+    </table>
+
+    <h2>Est. Cash to Close</h2>
+    <table>
+      ${S.financed?`
+      ${row("Hard Cost",fmt(c.hard),true)}
+      ${row("Less: Loan Amount","− "+fmt(c.loanAmt),true)}
+      ${row("Down Payment",fmt(c.downPayment),false,true)}
+      ${row("Origination Fee",fmt(c.orig),true)}`
+      :`${row("Hard Cost (full cash)",fmt(c.hard),true)}`}
+      ${row("Buy-Side Title (0.5% of lot)",fmt(c.buyTitle),true)}
+      ${row("Survey",fmt(S.surveyAmount),true)}
+      ${row("Est. Cash to Close",fmt(c.cashToClose),false,true)}
+    </table>
+
+    <h2>Holding Costs</h2>
+    <table>
+      ${row(`Property Taxes (${S.taxRate}% · ${S.loanMonths}mo)`,fmt(c.propTax),true)}
+      ${S.holding.insurance?row("Insurance",fmt(S.holding.insurance),true):""}
+      ${S.holding.maintenance?row("Maintenance",fmt(S.holding.maintenance),true):""}
+      ${S.holding.hoa?row("HOA / POA",fmt(S.holding.hoa),true):""}
+      ${S.holding.utilities?row("Utilities",fmt(S.holding.utilities),true):""}
+      ${S.holding.custom?row(S.hcLbl,fmt(S.holding.custom),true):""}
+      ${row("Total Holding",fmt(c.ht),false,true)}
+    </table>
+
+    <h2>Selling Costs</h2>
+    <table>
+      ${row(`Commission (${S.commPct*100}%)`,fmt(c.comm),true)}
+      ${row("Sale Title Fees (1%)",fmt(c.sellTitle),true)}
+      ${S.sellerCredit?row("Seller Credit to Buyer",fmt(S.sellerCredit),true):""}
+      ${row("Total Selling",fmt(c.tsell),false,true)}
+    </table>
+
+    <h2>Summary</h2>
+    <table>
+      ${row("Sale Price / ARV",fmt(S.salePrice),false,true)}
+      ${c.sqft?row("Price per Sqft","$"+c.priceSqft+"/sqft",true):""}
+      ${row("Total Hard Cost",fmt(c.hard),true)}
+      ${row("Total Financing",fmt(c.tfin),true)}
+      ${row("Total Holding",fmt(c.ht),true)}
+      ${row("Total Selling",fmt(c.tsell),true)}
+      ${row("Total All-In",fmt(c.total),false,true)}
+      ${row("LTV (Loan / ARV)",fmtP(c.ltv)+" — "+ltvLabel,true)}
+      ${row("Break-Even Sale Price",fmt(c.breakEven),true)}
+      ${row("Est. Cash to Close",fmt(c.cashToClose),true)}
+    </table>
+    <div class="net-row"><span class="net-lbl">Net Profit</span><span class="net-val">${fmt(c.net)}</span></div>
+  </div>
+  </div>
+
+  <div class="footer">
+    <span>Range Land Group · Emerton Homes · Confidential</span>
+    <span>Generated ${today}</span>
+  </div>
+
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`);
+  win.document.close();
+}
+
+function saveDeal(){
+  const snap=JSON.parse(JSON.stringify(S));
+  const name=S.dealName||(S.dealAddress?S.dealAddress.split(',')[0]:('Deal '+(S.savedDeals.length+1)));
+  snap.name=name;
+  snap.dealType=S.mode==='subdivide'?'land':'home';
+  snap.savedAt=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  if(!S.savedDeals)S.savedDeals=[];
+  S.savedDeals.push(snap);
+  saveState();render();
+  // Toast
+  const t=document.createElement('div');
+  t.textContent='✓ Saved: '+name;
+  t.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:0.7rem 1.4rem;border-radius:8px;font-size:0.82rem;font-family:Inter,sans-serif;font-weight:500;z-index:999;animation:fadeup 0.3s ease';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2000);
+}
+function deleteDeal(idx){
+  if(!confirm('Delete "'+S.savedDeals[idx].name+'"?'))return;
+  S.savedDeals.splice(idx,1);
+  saveState();render();
+}
+function loadDeal(idx){
+  const snap=S.savedDeals[parseInt(idx)];
+  if(!snap)return;
+  const saved=S.savedDeals;
+  Object.assign(S,snap);
+  S.savedDeals=saved;
+  if(snap.dealType==='land')S.mode='subdivide';
+  saveState();render();
+  // Close manager if open
+  const m=document.getElementById('deal-manager');if(m)m.remove();
+}
+
+function showDealManager(){
+  const existing=document.getElementById('deal-manager');
+  if(existing){existing.remove();return;}
+
+  const deals=S.savedDeals||[];
+  const modal=document.createElement('div');
+  modal.id='deal-manager';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:3rem 1rem;backdrop-filter:blur(4px);overflow-y:auto;-webkit-overflow-scrolling:touch';
+
+  let list='';
+  if(deals.length===0){
+    list='<div style="text-align:center;padding:2rem;color:var(--text-3);font-size:0.82rem">No saved deals yet. Use the <strong>Save</strong> button to save your current deal.</div>';
+  } else {
+    list=deals.map((d,i)=>{
+      const icon=d.dealType==='land'?'🏗':'🏠';
+      const name=d.name||'Deal '+(i+1);
+      const net=d.dealType==='land'?'':''; // We show date instead
+      return`<div style="display:flex;align-items:center;gap:0.8rem;padding:0.85rem 1rem;border-bottom:1px solid var(--border);${i===0?'border-top:1px solid var(--border)':''}">
+        <div style="font-size:1.2rem;flex-shrink:0">${icon}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:0.82rem;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(name)}</div>
+          <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.15rem">${d.dealType==='land'?'Subdivision':'Home + Land'}${d.savedAt?' · Saved '+d.savedAt:''}</div>
+        </div>
+        <div style="display:flex;gap:0.3rem;flex-shrink:0">
+          <button onclick="loadDeal(${i})" style="font-size:0.62rem;font-family:'Inter',sans-serif;padding:0.3rem 0.6rem;border-radius:5px;border:none;background:var(--accent);color:#fff;min-height:30px;cursor:pointer;font-weight:600">Load</button>
+          <button onclick="renameDeal(${i})" style="font-size:0.62rem;font-family:'Inter',sans-serif;padding:0.3rem 0.5rem;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);min-height:30px;cursor:pointer" title="Rename">✏️</button>
+          <button onclick="duplicateDeal(${i})" style="font-size:0.62rem;font-family:'Inter',sans-serif;padding:0.3rem 0.5rem;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);min-height:30px;cursor:pointer" title="Duplicate">📋</button>
+          <button onclick="deleteDealFromManager(${i})" style="font-size:0.62rem;font-family:'Inter',sans-serif;padding:0.3rem 0.5rem;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--red);min-height:30px;cursor:pointer" title="Delete">🗑</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  modal.innerHTML=`
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:14px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.4rem;border-bottom:1px solid var(--border)">
+        <div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--text)">Saved Deals</div>
+          <div style="font-size:0.62rem;color:var(--text-3);margin-top:0.15rem">${deals.length} deal${deals.length!==1?'s':''} saved</div>
+        </div>
+        <button onclick="document.getElementById('deal-manager').remove()" style="font-size:0.72rem;font-family:'Inter',sans-serif;padding:0.35rem 0.75rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text-3);min-height:32px;cursor:pointer">Close</button>
+      </div>
+      <div style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch">
+        ${list}
+      </div>
+      ${deals.length>0?`<div style="padding:1rem 1.4rem;border-top:1px solid var(--border)">
+        <button onclick="if(confirm('Delete ALL saved deals? This cannot be undone.')){S.savedDeals=[];saveState();render();document.getElementById('deal-manager').remove()}" style="width:100%;font-size:0.72rem;font-family:'Inter',sans-serif;padding:0.5rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--red);min-height:36px;cursor:pointer">Clear All Saved Deals</button>
+      </div>`:""}
+    </div>`;
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+  document.body.appendChild(modal);
+}
+
+function renameDeal(idx){
+  const deal=S.savedDeals[idx];
+  const newName=prompt('Rename deal:',deal.name||'Deal '+(idx+1));
+  if(newName===null)return;
+  deal.name=newName.trim()||deal.name;
+  saveState();
+  // Refresh manager
+  document.getElementById('deal-manager').remove();
+  showDealManager();
+}
+
+function duplicateDeal(idx){
+  const copy=JSON.parse(JSON.stringify(S.savedDeals[idx]));
+  copy.name=(copy.name||'Deal')+ ' (copy)';
+  copy.savedAt=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  S.savedDeals.push(copy);
+  saveState();
+  document.getElementById('deal-manager').remove();
+  showDealManager();
+}
+
+function deleteDealFromManager(idx){
+  const name=S.savedDeals[idx].name||'Deal '+(idx+1);
+  if(!confirm('Delete "'+name+'"?'))return;
+  S.savedDeals.splice(idx,1);
+  saveState();render();
+  document.getElementById('deal-manager').remove();
+  if(S.savedDeals.length>0)showDealManager();
+}
+
+render();
+</script>
+</body>
+</html>
